@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysUserServiceImpl implements SysUserService {
+    //注入Mapper接口
     @Autowired
     private SysUserMapper sysUserMapper;
 
@@ -23,7 +24,6 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public boolean login(String username, String password) {
         SysUserExample sysUserExample = new SysUserExample();
-
         sysUserExample.createCriteria().andUserNameEqualTo(username).andUserPasswordEqualTo(password).andUserFlagEqualTo(1);
         return sysUserMapper.selectByExample(sysUserExample).size()>0?true:false;
     }

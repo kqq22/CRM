@@ -8,6 +8,7 @@
     <result column="stk_ware" jdbcType="VARCHAR" property="stkWare" />
     <result column="stk_count" jdbcType="INTEGER" property="stkCount" />
     <result column="stk_memo" jdbcType="VARCHAR" property="stkMemo" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -83,7 +84,28 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+
   </select>
+    <select id="myselect" parameterType="com.crm.entity.StorageExample" resultMap="BaseResultMap">
+      select
+      s.*,p.prod_name as prod_name
+      from storage s,product p
+      where s.stk_prod_id=p.prod_id
+  </select>
+
+  <select id="myselectByExample" resultMap="BaseResultMap">
+        select
+        s.*,p.prod_name as prod_name
+        from storage s,product p
+        where s.stk_prod_id=p.prod_id
+        <if test="prodName != null">
+            and p.prod_name like '${prodName}'
+        </if>
+        <if test="stkWarehouse != null">
+            and s.stk_warehouse like '${stkWarehouse}'
+        </if>
+  </select>
+
   <delete id="deleteByExample" parameterType="com.crm.entity.StorageExample">
     delete from storage
     <if test="_parameter != null">

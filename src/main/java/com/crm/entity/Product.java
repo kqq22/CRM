@@ -74,4 +74,23 @@ public class Product implements Serializable {
     public void setProdMemo(String prodMemo) {
         this.prodMemo = prodMemo == null ? null : prodMemo.trim();
     }
+
+    public Product(Integer prodId, String prodName, String prodType, String prodBatch, String prodUnit, Long prodPrice, String prodMemo) {
+        this.prodId = prodId;
+        this.prodName = prodName;
+        this.prodType = prodType;
+        this.prodBatch = prodBatch;
+        this.prodUnit = prodUnit;
+        this.prodPrice = prodPrice;
+        this.prodMemo = prodMemo;
+    }
+
+    public Product(String prodName, String prodType, String prodBatch) {
+        this.prodName = prodName;
+        this.prodType = prodType;
+        this.prodBatch = prodBatch;
+    }
+
+    public Product() {
+    }
 }

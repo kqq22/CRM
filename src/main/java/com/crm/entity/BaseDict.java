@@ -54,4 +54,28 @@ public class BaseDict implements Serializable {
     public void setDictIsEditable(Integer dictIsEditable) {
         this.dictIsEditable = dictIsEditable;
     }
+
+    public BaseDict(Integer dictId, String dictType, String dictItem, String dictValue, Integer dictIsEditable) {
+        this.dictId = dictId;
+        this.dictType = dictType;
+        this.dictItem = dictItem;
+        this.dictValue = dictValue;
+        this.dictIsEditable = dictIsEditable;
+    }
+
+    public BaseDict(String dictType, String dictItem, String dictValue, Integer dictIsEditable) {
+        this.dictType = dictType;
+        this.dictItem = dictItem;
+        this.dictValue = dictValue;
+        this.dictIsEditable = dictIsEditable;
+    }
+
+    public BaseDict(String dictType, String dictItem, String dictValue) {
+        this.dictType = dictType;
+        this.dictItem = dictItem;
+        this.dictValue = dictValue;
+    }
+
+    public BaseDict() {
+    }
 }

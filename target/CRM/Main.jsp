@@ -161,8 +161,8 @@
                         <!--子菜单 -->
                         <div class="contentDiv" style="display:none">
                             <div><img src="images/left.gif" /><span><a href="#" url="/findBaseDictAll">数据字典管理</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="Manager/ProductSelect.html">查询产品信息</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="Manager/DepartSelect.html">查询库存</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="Manager/ProductSelect.jsp">查询产品信息</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="Manager/DepartSelect.jsp">查询库存</a></span></div>
                         </div>
                     </div>
                 </td>

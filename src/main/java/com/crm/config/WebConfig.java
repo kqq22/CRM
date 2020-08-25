@@ -27,7 +27,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		viewResolver.setPrefix("/");
 		//设置后缀
 		viewResolver.setSuffix(".jsp");
-		//设置bean在请求属性中也可以访问
+		//设置bean在请求属性中也可以访问setCacheable
+		viewResolver.setCache(false);
 		viewResolver.setExposeContextBeansAsAttributes(true);
 		return viewResolver;
 	}

@@ -15,6 +15,8 @@ public class Storage implements Serializable {
 
     private String stkMemo;
 
+    private String prodName;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getStkId() {
@@ -63,5 +65,30 @@ public class Storage implements Serializable {
 
     public void setStkMemo(String stkMemo) {
         this.stkMemo = stkMemo == null ? null : stkMemo.trim();
+    }
+
+    public String getProdName() {
+        return prodName;
+    }
+
+    public void setProdName(String prodName) {
+        this.prodName = prodName;
+    }
+
+    public Storage(Integer stkId, Integer stkProdId, String stkWarehouse, String stkWare, Integer stkCount, String stkMemo) {
+        this.stkId = stkId;
+        this.stkProdId = stkProdId;
+        this.stkWarehouse = stkWarehouse;
+        this.stkWare = stkWare;
+        this.stkCount = stkCount;
+        this.stkMemo = stkMemo;
+    }
+
+    public Storage(String stkWarehouse, String prodName) {
+        this.stkWarehouse = stkWarehouse;
+        this.prodName = prodName;
+    }
+
+    public Storage() {
     }
 }

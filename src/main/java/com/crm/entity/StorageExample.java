@@ -493,6 +493,11 @@ public class StorageExample {
             addCriterion("stk_memo not between", value1, value2, "stkMemo");
             return (Criteria) this;
         }
+
+        public Criteria andProdNameEqualTo(String value){
+            addCriterion("prod_name =", value, "prodName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
