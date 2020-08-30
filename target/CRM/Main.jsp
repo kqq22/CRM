@@ -32,11 +32,22 @@
             font-size: 12px;
         }
     </style>
+    <script type="text/javascript" src="JS/jquery-3.5.1.js"></script>
     <script type="text/javascript">
         $(function () {
             $(".menuDiv").click(function () {
                 $(this).next("div").slideToggle(300);
             });
+            //显示当前时间
+            var date = new Date();
+            this.year = date.getFullYear();
+            this.month = date.getMonth() + 1;
+            this.date = date.getDate();
+            this.month = this.month < 10 ? ('0' + this.month) : this.month;
+            this.date = this.date < 10 ? ('0' + this.date) : this.date;
+            this.day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()];
+            var currentTime =  this.year + "." + this.month + "." + this.date + "," + this.day;
+            $("#currentTime").text(currentTime);
         });
         $(function () {
             $("span").click(function () {
@@ -76,7 +87,7 @@
                                                     <td width="77%" height="25" valign="bottom">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0"></table>
                                                     </td>
-                                                    <td width="220" valign="bottom" nowrap="nowrap"><div align="right"><span class="STYLE1"><span class="STYLE2">■</span> 今天是：2016年5月12日 星期一</span></div></td>
+                                                    <td width="220" valign="bottom" nowrap="nowrap"><div align="right" ><span class="STYLE1"><span class="STYLE2">■</span ><div id="currentTime"></div></span></div></td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -103,7 +114,7 @@
             <tr>
                 <td height="28" background="images/main_36.gif">
                     <div style="background-image:url(images/main_32.gif);width:177px;height:28px;text-align:center;color:White;font-size:12px;line-height:35px;float:left">
-                        admin
+                        ${sessionScope.uname}
                     </div>
                     <div style="float:right;font-size:12px;line-height:35px;margin-right:5px;margin-top:3px;">
                         <a href="#"><img src="images/main_20.gif" style="border:solid 0px red" /></a>
@@ -126,26 +137,26 @@
                         <div class="menuDiv">营销管理</div>
                         <!--子菜单 -->
                         <div class="contentDiv" style="display:none">
-                            <div><img src="images/left.gif" /><span><a href="#" url="Sale/SaleChance.htm">销售机会管理</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="Sale/saleManager.htm">客户开发计划</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="Sale/SaleChance.jsp">销售机会管理</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="Sale/SaleManager.jsp">客户开发计划</a></span></div>
                         </div>
                         <!--菜单结束 -->
                         <!--父菜单 -->
                         <div class="menuDiv">客户管理</div>
                         <!--子菜单 -->
                         <div class="contentDiv" style="display:none">
-                            <div><img src="images/left.gif" /><span><a href="#" url="Customer/CustomerPage.htm">客户信息管理</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="Customer/LostsPage.htm">客户流失管理</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="Customer/CustomerPage.jsp">客户信息管理</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="Customer/LostsPage.jsp">客户流失管理</a></span></div>
                         </div>
                         <!--父菜单 -->
                         <div class="menuDiv">服务管理</div>
                         <!--子菜单 -->
                         <div class="contentDiv" style="display:none">
-                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceCreate.htm">服务创建</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceAllot.htm">服务分配</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceDispose.htm">服务处理</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceResult.htm">服务反馈</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceDetail.htm">服务归档</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceCreate.jsp">服务创建</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="/findUser">服务分配</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceDispose.jsp">服务处理</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceResult.jsp">服务反馈</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceDetail.jsp">服务归档</a></span></div>
                         </div>
                         <!--父菜单 -->
                         <div class="menuDiv">统计报表</div>

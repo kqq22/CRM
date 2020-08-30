@@ -11,6 +11,7 @@
     <result column="svr_request" jdbcType="VARCHAR" property="svrRequest" />
     <result column="svr_create_id" jdbcType="INTEGER" property="svrCreateId" />
     <result column="svr_create_by" jdbcType="VARCHAR" property="svrCreateBy" />
+    <result column="svr_create_date" jdbcType="DATE" property="svrCreateDate" />
     <result column="svr_due_id" jdbcType="INTEGER" property="svrDueId" />
     <result column="svr_due_to" jdbcType="VARCHAR" property="svrDueTo" />
     <result column="svr_due_date" jdbcType="DATE" property="svrDueDate" />
@@ -20,6 +21,8 @@
     <result column="svr_deal_date" jdbcType="DATE" property="svrDealDate" />
     <result column="svr_result" jdbcType="VARCHAR" property="svrResult" />
     <result column="svr_satisfy" jdbcType="INTEGER" property="svrSatisfy" />
+    <result column="svr_startdate" jdbcType="INTEGER" property="svrStartDate" />
+    <result column="svr_enddate" jdbcType="INTEGER" property="svrEndDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,8 +84,8 @@
   </sql>
   <sql id="Base_Column_List">
     svr_id, svr_type, svr_title, svr_cust_no, svr_cust_name, svr_status, svr_request, 
-    svr_create_id, svr_create_by, svr_due_id, svr_due_to, svr_due_date, svr_deal, svr_deal_id, 
-    svr_deal_by, svr_deal_date, svr_result, svr_satisfy
+    svr_create_id, svr_create_by, svr_create_date, svr_due_id, svr_due_to, svr_due_date, 
+    svr_deal, svr_deal_id, svr_deal_by, svr_deal_date, svr_result, svr_satisfy
   </sql>
   <select id="selectByExample" parameterType="com.crm.entity.CstServiceExample" resultMap="BaseResultMap">
     select
@@ -98,6 +101,23 @@
       order by ${orderByClause}
     </if>
   </select>
+
+
+  <select id="mySelect" parameterType="com.crm.entity.CstServiceExample" resultMap="BaseResultMap">
+    select * from cst_service
+    WHERE svr_cust_name like '%${svrCustName}%'
+    and svr_title like '%${svrTitle}%'
+    <if test="svrType!='全部'">
+      and svr_type like '%${svrType}%'
+    </if>
+    <if test="svrStatus!='全部'">
+      and svr_status like '%${svrStatus}%'
+    </if>
+    <if test="svrStartDate!='' and svrEndDate!=''">
+      and svr_create_date between '${svrStartDate}' and '${svrEndDate}'
+    </if>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -118,17 +138,17 @@
     insert into cst_service (svr_id, svr_type, svr_title, 
       svr_cust_no, svr_cust_name, svr_status, 
       svr_request, svr_create_id, svr_create_by, 
-      svr_due_id, svr_due_to, svr_due_date, 
-      svr_deal, svr_deal_id, svr_deal_by, 
-      svr_deal_date, svr_result, svr_satisfy
-      )
+      svr_create_date, svr_due_id, svr_due_to, 
+      svr_due_date, svr_deal, svr_deal_id, 
+      svr_deal_by, svr_deal_date, svr_result, 
+      svr_satisfy)
     values (#{svrId,jdbcType=INTEGER}, #{svrType,jdbcType=VARCHAR}, #{svrTitle,jdbcType=VARCHAR}, 
       #{svrCustNo,jdbcType=VARCHAR}, #{svrCustName,jdbcType=VARCHAR}, #{svrStatus,jdbcType=VARCHAR}, 
       #{svrRequest,jdbcType=VARCHAR}, #{svrCreateId,jdbcType=INTEGER}, #{svrCreateBy,jdbcType=VARCHAR}, 
-      #{svrDueId,jdbcType=INTEGER}, #{svrDueTo,jdbcType=VARCHAR}, #{svrDueDate,jdbcType=DATE}, 
-      #{svrDeal,jdbcType=VARCHAR}, #{svrDealId,jdbcType=INTEGER}, #{svrDealBy,jdbcType=VARCHAR}, 
-      #{svrDealDate,jdbcType=DATE}, #{svrResult,jdbcType=VARCHAR}, #{svrSatisfy,jdbcType=INTEGER}
-      )
+      #{svrCreateDate,jdbcType=DATE}, #{svrDueId,jdbcType=INTEGER}, #{svrDueTo,jdbcType=VARCHAR}, 
+      #{svrDueDate,jdbcType=DATE}, #{svrDeal,jdbcType=VARCHAR}, #{svrDealId,jdbcType=INTEGER}, 
+      #{svrDealBy,jdbcType=VARCHAR}, #{svrDealDate,jdbcType=DATE}, #{svrResult,jdbcType=VARCHAR}, 
+      #{svrSatisfy,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.crm.entity.CstService">
     insert into cst_service
@@ -159,6 +179,9 @@
       </if>
       <if test="svrCreateBy != null">
         svr_create_by,
+      </if>
+      <if test="svrCreateDate != null">
+        svr_create_date,
       </if>
       <if test="svrDueId != null">
         svr_due_id,
@@ -215,6 +238,9 @@
       </if>
       <if test="svrCreateBy != null">
         #{svrCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCreateDate != null">
+        #{svrCreateDate,jdbcType=DATE},
       </if>
       <if test="svrDueId != null">
         #{svrDueId,jdbcType=INTEGER},
@@ -281,6 +307,9 @@
       <if test="record.svrCreateBy != null">
         svr_create_by = #{record.svrCreateBy,jdbcType=VARCHAR},
       </if>
+      <if test="record.svrCreateDate != null">
+        svr_create_date = #{record.svrCreateDate,jdbcType=DATE},
+      </if>
       <if test="record.svrDueId != null">
         svr_due_id = #{record.svrDueId,jdbcType=INTEGER},
       </if>
@@ -324,6 +353,7 @@
       svr_request = #{record.svrRequest,jdbcType=VARCHAR},
       svr_create_id = #{record.svrCreateId,jdbcType=INTEGER},
       svr_create_by = #{record.svrCreateBy,jdbcType=VARCHAR},
+      svr_create_date = #{record.svrCreateDate,jdbcType=DATE},
       svr_due_id = #{record.svrDueId,jdbcType=INTEGER},
       svr_due_to = #{record.svrDueTo,jdbcType=VARCHAR},
       svr_due_date = #{record.svrDueDate,jdbcType=DATE},
@@ -363,6 +393,9 @@
       </if>
       <if test="svrCreateBy != null">
         svr_create_by = #{svrCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="svrCreateDate != null">
+        svr_create_date = #{svrCreateDate,jdbcType=DATE},
       </if>
       <if test="svrDueId != null">
         svr_due_id = #{svrDueId,jdbcType=INTEGER},
@@ -404,6 +437,7 @@
       svr_request = #{svrRequest,jdbcType=VARCHAR},
       svr_create_id = #{svrCreateId,jdbcType=INTEGER},
       svr_create_by = #{svrCreateBy,jdbcType=VARCHAR},
+      svr_create_date = #{svrCreateDate,jdbcType=DATE},
       svr_due_id = #{svrDueId,jdbcType=INTEGER},
       svr_due_to = #{svrDueTo,jdbcType=VARCHAR},
       svr_due_date = #{svrDueDate,jdbcType=DATE},

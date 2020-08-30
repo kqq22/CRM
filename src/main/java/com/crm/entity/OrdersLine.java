@@ -1,6 +1,9 @@
 package com.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 public class OrdersLine implements Serializable {
     private Integer oddId;
@@ -14,6 +17,15 @@ public class OrdersLine implements Serializable {
     private String oddUnit;
 
     private Long oddPrice;
+
+    private String oddProdName;
+
+    private String odrAddr;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date odrDate;
+
+    private Integer odrStatus;
 
     private static final long serialVersionUID = 1L;
 
@@ -63,5 +75,37 @@ public class OrdersLine implements Serializable {
 
     public void setOddPrice(Long oddPrice) {
         this.oddPrice = oddPrice;
+    }
+
+    public String getOddProdName() {
+        return oddProdName;
+    }
+
+    public void setOddProdName(String oddProdName) {
+        this.oddProdName = oddProdName;
+    }
+
+    public String getOdrAddr() {
+        return odrAddr;
+    }
+
+    public void setOdrAddr(String odrAddr) {
+        this.odrAddr = odrAddr;
+    }
+
+    public Date getOdrDate() {
+        return odrDate;
+    }
+
+    public void setOdrDate(Date odrDate) {
+        this.odrDate = odrDate;
+    }
+
+    public Integer getOdrStatus() {
+        return odrStatus;
+    }
+
+    public void setOdrStatus(Integer odrStatus) {
+        this.odrStatus = odrStatus;
     }
 }

@@ -1,5 +1,7 @@
 package com.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ public class Orders implements Serializable {
 
     private String odrCustomer;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date odrDate;
 
     private String odrAddr;

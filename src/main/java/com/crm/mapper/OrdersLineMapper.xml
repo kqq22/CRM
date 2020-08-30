@@ -8,6 +8,10 @@
     <result column="odd_count" jdbcType="INTEGER" property="oddCount" />
     <result column="odd_unit" jdbcType="VARCHAR" property="oddUnit" />
     <result column="odd_price" jdbcType="DECIMAL" property="oddPrice" />
+    <result column="prod_name" jdbcType="DECIMAL" property="oddProdName" />
+    <result column="odr_addr" jdbcType="DECIMAL" property="odrAddr" />
+    <result column="odr_date" jdbcType="DECIMAL" property="odrDate" />
+    <result column="odr_status" jdbcType="DECIMAL" property="odrStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,6 +88,19 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="mySelect"  resultMap="BaseResultMap">
+        select l.*,
+        p.prod_name as prod_name,
+        o.odr_addr as odr_addr,
+        o.odr_date as odr_date,
+        o.odr_status as odr_status
+        from orders_line l,product p,orders o
+        where l.odd_prod_id=p.prod_id
+        and l.odd_order_id=o.odr_id
+        and l.odd_order_id=${oddOrderId};
+  </select>
+
   <delete id="deleteByExample" parameterType="com.crm.entity.OrdersLineExample">
     delete from orders_line
     <if test="_parameter != null">

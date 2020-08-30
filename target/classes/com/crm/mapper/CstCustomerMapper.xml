@@ -102,6 +102,18 @@
       order by ${orderByClause}
     </if>
   </select>
+
+   <select id="mySelectByExample" parameterType="com.crm.entity.CstCustomerExample" resultMap="BaseResultMap">
+      select * from cst_customer
+      where cust_no like
+      and cust_name like '%${custName}%'
+      and cust_region like '%${custRegion}%'
+      and cust_manager_name like '%${custManagerName}%'
+      <if test="custLevel!=0">
+          and cust_level = ${custLevel}
+      </if>
+    </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

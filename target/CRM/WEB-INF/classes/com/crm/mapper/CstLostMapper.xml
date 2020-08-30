@@ -95,6 +95,16 @@
     from cst_lost
     where lst_id = #{lstId,jdbcType=INTEGER}
   </select>
+
+  <select id="mySelect" parameterType="com.crm.entity.CstLostExample" resultMap="BaseResultMap">
+      select * from cst_lost
+      where lst_cust_name like '%${lstCustName}%'
+      and lst_cust_manager_name like '%${lstCustManagerName}%'
+      <if test="lstStatus!=null">
+        and lst_status = ${lstStatus}
+      </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cst_lost
     where lst_id = #{lstId,jdbcType=INTEGER}

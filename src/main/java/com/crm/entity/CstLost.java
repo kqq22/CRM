@@ -1,5 +1,7 @@
 package com.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,8 +16,10 @@ public class CstLost implements Serializable {
 
     private String lstCustManagerName;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date lstLastOrderDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date lstLostDate;
 
     private String lstDelay;

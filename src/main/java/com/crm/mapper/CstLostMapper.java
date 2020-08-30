@@ -5,7 +5,9 @@ import com.crm.entity.CstLostExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CstLostMapper {
     long countByExample(CstLostExample example);
 
@@ -20,6 +22,8 @@ public interface CstLostMapper {
     List<CstLost> selectByExampleWithRowbounds(CstLostExample example, RowBounds rowBounds);
 
     List<CstLost> selectByExample(CstLostExample example);
+
+    List<CstLost> mySelect(CstLost cstLost);
 
     CstLost selectByPrimaryKey(Integer lstId);
 

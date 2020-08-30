@@ -1,5 +1,7 @@
 package com.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,12 +26,14 @@ public class SalChance implements Serializable {
 
     private String chcCreateBy;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date chcCreateDate;
 
     private Integer chcDueId;
 
     private String chcDueTo;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date chcDueDate;
 
     private Integer chcStatus;
@@ -116,6 +120,7 @@ public class SalChance implements Serializable {
         this.chcCreateBy = chcCreateBy == null ? null : chcCreateBy.trim();
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getChcCreateDate() {
         return chcCreateDate;
     }
@@ -140,6 +145,7 @@ public class SalChance implements Serializable {
         this.chcDueTo = chcDueTo == null ? null : chcDueTo.trim();
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     public Date getChcDueDate() {
         return chcDueDate;
     }
@@ -154,5 +160,33 @@ public class SalChance implements Serializable {
 
     public void setChcStatus(Integer chcStatus) {
         this.chcStatus = chcStatus;
+    }
+
+    public SalChance(String chcSource, String chcCustName, String chcTitle, Integer chcRate, String chcLinkman, String chcTel, String chcDesc, String chcCreateBy, Date chcCreateDate) {
+        this.chcSource = chcSource;
+        this.chcCustName = chcCustName;
+        this.chcTitle = chcTitle;
+        this.chcRate = chcRate;
+        this.chcLinkman = chcLinkman;
+        this.chcTel = chcTel;
+        this.chcDesc = chcDesc;
+        this.chcCreateBy = chcCreateBy;
+        this.chcCreateDate = chcCreateDate;
+    }
+
+    public SalChance(String chcCustName, String chcLinkman, String chcTitle,Integer chcStatus) {
+        this.chcCustName = chcCustName;
+        this.chcLinkman = chcLinkman;
+        this.chcTitle = chcTitle;
+        this.chcStatus = chcStatus;
+    }
+
+    public SalChance(String chcCustName, String chcLinkman, String chcTitle) {
+        this.chcCustName = chcCustName;
+        this.chcLinkman = chcLinkman;
+        this.chcTitle = chcTitle;
+    }
+
+    public SalChance() {
     }
 }

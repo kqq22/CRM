@@ -22,21 +22,21 @@
             <tr>
                 <th>类别：</th>
                 <td>
-                    <select name="type">
+                    <select name="dictType">
                         <option>客户等级</option>
                         <option>服务类型</option>
                     </select>
                 </td>
                 <th>条目：</th>
                 <td>
-                    <input type="text" name="item"/>
+                    <input type="text" name="dictItem"/>
                 </td>
             </tr>
             <tr>
                 <th>值：</th>
-                <td><input type="text" name="value"/></td>
+                <td><input type="text" name="dictValue"/></td>
                 <th>是否编辑：</th>
-                <td><input type="checkbox" name="checkbox"/></td>
+                <td><input type="checkbox" name="dictIsEditable"/></td>
             </tr>
             <tfoot>
             <tr>

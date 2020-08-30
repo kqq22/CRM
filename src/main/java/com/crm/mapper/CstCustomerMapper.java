@@ -5,7 +5,9 @@ import com.crm.entity.CstCustomerExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CstCustomerMapper {
     long countByExample(CstCustomerExample example);
 
@@ -22,6 +24,8 @@ public interface CstCustomerMapper {
     List<CstCustomer> selectByExample(CstCustomerExample example);
 
     CstCustomer selectByPrimaryKey(String custNo);
+
+    List<CstCustomer> mySelectByExample(CstCustomer record);
 
     int updateByExampleSelective(@Param("record") CstCustomer record, @Param("example") CstCustomerExample example);
 

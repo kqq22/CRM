@@ -59,19 +59,14 @@ public class BaseDictController {
     /**
      * 模糊查询
      * @param m
-     * @param request
      * @return
      */
     @RequestMapping("/findBaseDictByExample")
-    public String findBaseDictByExample(Model m,HttpServletRequest request){
-        //获取参数
-        String Type = request.getParameter("dictType");
-        String Item = request.getParameter("dictItem");
-        String Value = request.getParameter("dictValue");
-        String dictType = "%"+Type+"%";
-        String dictItem = "%"+Item+"%";
-        String dictValue = "%"+Value+"%";
-        BaseDict baseDict = new BaseDict(dictType,dictItem,dictValue);
+    public String findBaseDictByExample(BaseDict baseDict,Model m){
+        String dictType = "%"+baseDict.getDictType()+"%";
+        String dictItem = "%"+baseDict.getDictItem()+"%";
+        String dictValue = "%"+baseDict.getDictValue()+"%";
+        baseDict = new BaseDict(dictType,dictItem,dictValue);
         //调用查询方法
         List<BaseDict> list = baseDictService.findBaseDictByExample(baseDict);
         m.addAttribute("list",list);

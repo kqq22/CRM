@@ -1,5 +1,7 @@
 package com.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ public class CstActivity implements Serializable {
 
     private String atvCustName;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date atvDate;
 
     private String atvPlace;

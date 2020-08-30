@@ -24,7 +24,6 @@ import java.util.Properties;
 )
 )
 @MapperScan("com.crm.mapper")
-@ImportResource("classpath:spring-transation.xml")
 public class RootConfig {
     /**
      * 数据源配置
@@ -34,7 +33,7 @@ public class RootConfig {
     public DataSource dataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/crm");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/crm?serverTimezone=UTC");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         dataSource.setInitialSize(5);
@@ -67,14 +66,5 @@ public class RootConfig {
         //将拦截器设置到sqlSessionFactroy中
         factoryBean.setPlugins(new PageInterceptor[]{ pageInterceptor });
         return factoryBean.getObject();
-    }
-    /**
-     * 配置事务管理器
-     * @param dataSource
-     * @return
-     */
-    @Bean
-    public DataSourceTransactionManager transactionManager(DataSource dataSource){
-        return new DataSourceTransactionManager(dataSource);
     }
 }

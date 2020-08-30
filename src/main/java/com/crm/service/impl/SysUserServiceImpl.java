@@ -1,10 +1,13 @@
 package com.crm.service.impl;
 
+import com.crm.entity.SysUser;
 import com.crm.entity.SysUserExample;
 import com.crm.mapper.SysUserMapper;
 import com.crm.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 用户业务逻辑实现类
@@ -22,9 +25,19 @@ public class SysUserServiceImpl implements SysUserService {
      * @return
      */
     @Override
-    public boolean login(String username, String password) {
+    public List<SysUser> login(String username, String password) {
         SysUserExample sysUserExample = new SysUserExample();
         sysUserExample.createCriteria().andUserNameEqualTo(username).andUserPasswordEqualTo(password).andUserFlagEqualTo(1);
-        return sysUserMapper.selectByExample(sysUserExample).size()>0?true:false;
+        return sysUserMapper.selectByExample(sysUserExample);
+    }
+
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @Override
+    public List<SysUser> findSysUser() {
+        return sysUserMapper.selectByExample(null);
     }
 }
