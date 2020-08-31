@@ -23,6 +23,8 @@
     <result column="cust_bank_account" jdbcType="VARCHAR" property="custBankAccount" />
     <result column="cust_local_tax_no" jdbcType="VARCHAR" property="custLocalTaxNo" />
     <result column="cust_status" jdbcType="VARCHAR" property="custStatus" />
+    <result column="count" jdbcType="VARCHAR" property="count" />
+    <result column="dict_item" jdbcType="VARCHAR" property="dictItem" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -112,6 +114,21 @@
       <if test="custLevel!=0">
           and cust_level = ${custLevel}
       </if>
+    </select>
+
+    <select id="selectMakeReport" parameterType="com.crm.entity.CstCustomerExample" resultMap="BaseResultMap">
+        select b.dict_item as dict_item,count(*) as count from cst_customer c,base_dict b
+        where c.cust_level = b.dict_id
+        <if test="contribute=='客户等级'">
+            group by b.dict_item
+        </if>
+        <if test="contribute=='信用度'">
+            group by cust_credit
+        </if>
+        <if test="contribute=='满意度'">
+            group by cust_satisfy
+        </if>
+        order by count(*)
     </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -104,15 +105,37 @@ public class CstLostController {
     /**
      * 修改客户流失信息（添加流失原因）
      * @param cstLost
-     * @param lstId
      */
     @RequestMapping("/updateCstLosts")
-    public String updateCstLosts(CstLost cstLost, Integer lstId){
+    public String updateCstLosts(CstLost cstLost){
         cstLost.setLstStatus("3");
+        cstLost.setLstLostDate(new Date());
         int row = cstLostService.updateCstLostById(cstLost);
         return "Customer/LostsPage";
     }
 
-
-
+    /**
+     * 根据状态查询客户信息（客户流失分析）
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findCstLostByStatus")
+    public String findCstLostByStatus(CstLost cstLost,Model m){
+        List<CstLost> cstLostList;
+        if(cstLost.getLstCustName()==null){
+            cstLost.setLstCustName("");
+        }
+        if(cstLost.getLstCustManagerName()==null){
+            cstLost.setLstCustManagerName("");
+        }
+        if(cstLost.getLstCustName()==""&&cstLost.getLstCustManagerName()==""){
+            //3 为已流失的客户
+            cstLostList = cstLostService.findCstLostByStatus("3");
+        }else {
+            cstLost.setLstStatus("3");
+            cstLostList = cstLostService.findCstLostByExample(cstLost);
+        }
+        m.addAttribute("cstLostList",cstLostList);
+        return "Report/LostReport";
+    }
 }

@@ -45,6 +45,10 @@ public class CstCustomer implements Serializable {
 
     private String custStatus;
 
+    private String dictItem;
+
+    private Integer count;
+
     private static final long serialVersionUID = 1L;
 
     public String getCustNo() {
@@ -213,5 +217,21 @@ public class CstCustomer implements Serializable {
 
     public void setCustStatus(String custStatus) {
         this.custStatus = custStatus == null ? null : custStatus.trim();
+    }
+
+    public String getDictItem() {
+        return dictItem;
+    }
+
+    public void setDictItem(String dictItem) {
+        this.dictItem = dictItem;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

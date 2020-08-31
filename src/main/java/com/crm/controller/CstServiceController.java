@@ -53,7 +53,7 @@ public class CstServiceController {
 
     /**
      *
-     * 分页查询+模糊查询
+     * 分页查询+模糊查询（服务分配）
      * @param pageNum
      * @return
      */
@@ -78,7 +78,6 @@ public class CstServiceController {
             }else {
                 list = cstServiceService.findCstServiceByExample(cstService);
             }
-
         }
         //返回Json对象
         PageInfo<CstService> pageInfo = new PageInfo<>(list);
@@ -98,18 +97,153 @@ public class CstServiceController {
     }
 
     /**
+     * 查询所有用户（跳转到服务处理）
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findUserDispose")
+    public  String findUserDispose(Model m){
+        List<SysUser> userList = sysUserService.findSysUser();
+        m.addAttribute("userList",userList);
+        return "CustomerService/ServiceDispose" ;
+    }
+
+    /**
+     * 查询所有用户（跳转到服务反馈）
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findUserResult")
+    public  String findUserResult(Model m){
+        List<SysUser> userList = sysUserService.findSysUser();
+        m.addAttribute("userList",userList);
+        return "CustomerService/ServiceResult" ;
+    }
+
+    /**
+     * 查询所有用户（跳转到服务归档）
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findUserDetail")
+    public  String findUserDetail(Model m){
+        List<SysUser> userList = sysUserService.findSysUser();
+        m.addAttribute("userList",userList);
+        return "CustomerService/ServiceDetail" ;
+    }
+
+
+    /**
      * 修改服务分配（添加指派人）
      */
     @RequestMapping("/updateCstService")
     public void updateCstService(CstService cstService,HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String createDate = request.getParameter("createDate");
-        System.out.println(cstService.getSvrType());
         cstService.setSvrCreateDate(sdf.parse(createDate));
         cstService.setSvrStatus("已分配");
         cstService.setSvrDueDate(new Date());
         int row = cstServiceService.udpateService(cstService);
-        System.out.println(row);
         response.sendRedirect("/findUser");
+    }
+
+    /**
+     * 删除服务管理记录
+     * @param id
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping("/delCstService")
+    public void delCstService(Integer id ,HttpServletResponse response) throws IOException {
+        int row = cstServiceService.delService(id);
+        response.sendRedirect("/findUser");
+    }
+
+    /**
+     * 根据id查询服务管理信息 (跳转到服务处理页面)
+     * @param id
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findCstServiceById")
+    public String findCstServiceById(Integer id,Model m){
+        CstService cstService = cstServiceService.findCstServiceById(id);
+        m.addAttribute("cstService",cstService);
+        return "CustomerService/ServiceDisposeDialog";
+    }
+
+    /**
+     * 根据id查询服务管理信息 (跳转到服务反馈页面)
+     * @param id
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findCstServiceByIdResult")
+    public String findCstServiceByIdResult(Integer id,Model m){
+        CstService cstService = cstServiceService.findCstServiceById(id);
+        m.addAttribute("cstService",cstService);
+        return "CustomerService/ServiceResultDialog";
+    }
+
+    /**
+     * 根据id查询服务管理信息 (跳转到服务反馈页面)
+     * @param id
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findCstServiceByIdDetail")
+    public String findCstServiceByIdDetail(Integer id,Model m){
+        CstService cstService = cstServiceService.findCstServiceById(id);
+        m.addAttribute("cstService",cstService);
+        return "CustomerService/ServiceDetailDialog";
+    }
+
+    /**
+     * 服务处理
+     * @param cstService
+     */
+    @RequestMapping("/updateCstServiceDetail")
+    public void updateCstServiceDetail(CstService cstService,HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String createDate = request.getParameter("createDate");
+        String DueDate = request.getParameter("DueDate");
+        cstService.setSvrCreateDate(sdf.parse(createDate));
+        cstService.setSvrDueDate(sdf.parse(DueDate));
+        cstService.setSvrStatus("已处理");
+        cstService.setSvrDealDate(new Date());
+        int row = cstServiceService.updateCstServiceDetail(cstService);
+        response.sendRedirect("/findUser");
+    }
+
+    /**
+     * 服务处理
+     * @param cstService
+     */
+    @RequestMapping("/updateCstServiceResult")
+    public void updateCstServiceResult(CstService cstService,HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String createDate = request.getParameter("createDate");
+        String DueDate = request.getParameter("DueDate");
+        String DealDate = request.getParameter("DealDate");
+        cstService.setSvrCreateDate(sdf.parse(createDate));
+        cstService.setSvrDueDate(sdf.parse(DueDate));
+        cstService.setSvrDealDate(sdf.parse(DealDate));
+        cstService.setSvrStatus("已反馈");
+        int row = cstServiceService.updateCstServiceDetail(cstService);
+        response.sendRedirect("/findUserResult");
+    }
+
+    /**
+     * 客户服务分析
+     * @param request
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findCstServiceReport")
+    public String findCstServiceReport(HttpServletRequest request,Model m){
+        String svrCreateDate = request.getParameter("svrCreateDate");
+        List<CstService> cstServiceList = cstServiceService.findCstServiceReport(svrCreateDate);
+        m.addAttribute("cstServiceList",cstServiceList);
+        return "Report/ServerReport";
     }
 }

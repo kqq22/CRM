@@ -25,6 +25,8 @@ public interface CstServiceMapper {
 
     List<CstService> mySelect(CstService cstService);
 
+    List<CstService> selectServiceReport(@Param("svrCreateDate") String CreateDate);
+
     CstService selectByPrimaryKey(Integer svrId);
 
     int updateByExampleSelective(@Param("record") CstService record, @Param("example") CstServiceExample example);

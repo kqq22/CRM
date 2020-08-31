@@ -13,4 +13,12 @@ public interface OrdersService {
      * @return
      */
     public List<Orders> findOrdersAll(String custName);
+
+    /**
+     * 客户贡献分析
+     * @param customerName
+     * @param odrDate
+     * @return
+     */
+    public List<Orders> findContributeReport(String customerName,String odrDate);
 }

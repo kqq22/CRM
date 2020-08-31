@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -43,5 +45,31 @@ public class OrdersController {
         m.addAttribute("cName",cName);
         m.addAttribute("cNo",cNo);
         return "/Customer/OrderPage";
+    }
+
+
+    /**
+     * 客户贡献分析
+     * @param request
+     * @param m
+     * @return
+     */
+    @RequestMapping("/findContributeReport")
+    public String findContributeReport(HttpServletRequest request, Model m){
+        String odrCustomer = request.getParameter("odrCustomer");
+        String odrDate = request.getParameter("odrDate");
+        System.out.println(odrCustomer+"--"+odrDate);
+        if(odrCustomer==null){
+            odrCustomer ="";
+        }
+        if(odrDate==null){
+            odrDate ="";
+        }
+        System.out.println(odrCustomer+"--"+odrDate);
+        List<Orders> ordersList = ordersService.findContributeReport(odrCustomer,odrDate);
+        System.out.println(ordersList.size());
+        m.addAttribute("ordersList",ordersList);
+        return "/Report/ContributeReport";
+
     }
 }

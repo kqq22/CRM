@@ -64,5 +64,14 @@ public class CstCustomerServiceImpl implements CstCustomerService {
         return cstCustomerMapper.deleteByPrimaryKey(no);
     }
 
+    /**
+     * 查询客户构成分析
+     * @return
+     */
+    @Override
+    public List<CstCustomer> findCstCustomerMakeReport(String contribute) {
+        return cstCustomerMapper.selectMakeReport(contribute);
+    }
+
 
 }

@@ -17,6 +17,8 @@ public class Orders implements Serializable {
 
     private String odrStatus;
 
+    private Integer orderAmount;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getOdrId() {
@@ -57,5 +59,13 @@ public class Orders implements Serializable {
 
     public void setOdrStatus(String odrStatus) {
         this.odrStatus = odrStatus == null ? null : odrStatus.trim();
+    }
+
+    public Integer getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(Integer orderAmount) {
+        this.orderAmount = orderAmount;
     }
 }

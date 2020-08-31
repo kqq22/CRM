@@ -25,6 +25,8 @@ public interface CstCustomerMapper {
 
     CstCustomer selectByPrimaryKey(String custNo);
 
+    List<CstCustomer> selectMakeReport(@Param("contribute") String contribute);
+
     List<CstCustomer> mySelectByExample(CstCustomer record);
 
     int updateByExampleSelective(@Param("record") CstCustomer record, @Param("example") CstCustomerExample example);

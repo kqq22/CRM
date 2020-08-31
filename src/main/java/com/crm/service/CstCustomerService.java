@@ -40,4 +40,10 @@ public interface CstCustomerService {
      * @return
      */
     public int delCstCustomerByNo(String no);
+
+    /**
+     * 查询客户构成分析
+     * @return
+     */
+    public List<CstCustomer> findCstCustomerMakeReport(String contribute);
 }

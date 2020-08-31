@@ -85,7 +85,18 @@ public class CstCustomerController {
     @RequestMapping("/delCstCustomer")
     public String delCstCustomer(String no){
         int row = cstCustomerService.delCstCustomerByNo(no);
-        System.out.println(row);
         return "/Customer/CustomerPage";
+    }
+
+    /**
+     * 客户构成分析
+     * @return
+     */
+    @RequestMapping("/findCstCustomerMakeReport")
+    public String findCstCustomerMakeReport(HttpServletRequest request,Model m){
+        String contribute = request.getParameter("contribute");
+        List<CstCustomer> cstCustomerList =  cstCustomerService.findCstCustomerMakeReport(contribute);
+        m.addAttribute("cstCustomerList",cstCustomerList);
+        return "/Report/MakeReport";
     }
 }

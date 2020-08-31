@@ -21,6 +21,8 @@ public interface OrdersMapper {
 
     List<Orders> selectByExample(OrdersExample example);
 
+    List<Orders> selectContributeReport(@Param("odrCustomer") String odrCustomer,@Param("odrDate") String odrDate);
+
     int updateByExampleSelective(@Param("record") Orders record, @Param("example") OrdersExample example);
 
     int updateByExample(@Param("record") Orders record, @Param("example") OrdersExample example);

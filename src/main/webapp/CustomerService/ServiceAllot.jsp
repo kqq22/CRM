@@ -136,7 +136,7 @@
                 }else{
                     $svrStatustd.text(cstservice.svrStatus);
                 }
-                $cz.html("<a>" +
+                $cz.html("<a href='/delCstService?id="+cstservice.svrId+"'>" +
                     "<img src=\"../images/bt_del.gif\" title=\"删除\" style=\"border:0px\" />" +
                     "</a>");
                 //把列添加到行
@@ -229,24 +229,6 @@
             <th>服务分配</th>
             <th>操作</th>
         </tr>
- <!--       <tr>
-            <td>睿智数码</td>
-            <td>询问收音机订单运费承担方式</td>
-            <td>咨询</td>
-            <td>张三</td>
-            <td>2011年5月2日</td>
-            <td>
-                <select>
-                    <option>张三</option>
-                    <option>李四</option>
-                    <option>王五</option>
-                </select>
-                <input type="button" value="确定" />
-            </td>
-            <td>
-                <img src="../images/bt_del.gif" title="删除" style="border:0px" />
-            </td>
-        </tr>-->
     </table>
 </form>
     <div id="pageDiv">

@@ -7,6 +7,7 @@
     <result column="odr_date" jdbcType="DATE" property="odrDate" />
     <result column="odr_addr" jdbcType="VARCHAR" property="odrAddr" />
     <result column="odr_status" jdbcType="VARCHAR" property="odrStatus" />
+    <result column="orderAmount" jdbcType="VARCHAR" property="orderAmount" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -186,4 +187,15 @@
       order by ${orderByClause}
     </if>
   </select>
+
+   <select id="selectContributeReport" parameterType="com.crm.entity.OrdersExample" resultMap="BaseResultMap">
+      select o.odr_customer,sum(l.odd_count*odd_price) as orderAmount from orders o,orders_line l
+      where o.odr_id=l.odd_order_id
+      and o.odr_customer like '%${odrCustomer}%'
+      <if test="odrDate!=''">
+        and o.odr_date > '${odrDate}'
+      </if>
+      group by o.odr_customer
+      order by orderAmount desc;
+    </select>
 </mapper>

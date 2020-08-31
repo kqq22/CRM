@@ -1,5 +1,6 @@
 package com.crm.service.impl;
 import com.crm.entity.CstLost;
+import com.crm.entity.CstLostExample;
 import com.crm.mapper.CstLostMapper;
 import com.crm.service.CstLostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,17 @@ public class CstLostServiceImpl implements CstLostService {
     @Override
     public int updateCstLostById(CstLost cstLost) {
         return cstLostMapper.updateByPrimaryKey(cstLost);
+    }
+
+    /**
+     * 根据状态查询已流失的客户（客户流失分析）
+     * @param status
+     * @return
+     */
+    @Override
+    public List<CstLost> findCstLostByStatus(String status) {
+        CstLostExample cstLostExample = new CstLostExample();
+        cstLostExample.createCriteria().andLstStatusEqualTo(status);
+        return cstLostMapper.selectByExample(cstLostExample);
     }
 }

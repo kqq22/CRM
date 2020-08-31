@@ -34,4 +34,12 @@ public interface CstLostService {
      * @return
      */
     public int updateCstLostById(CstLost cstLost);
+
+    /**
+     * 根据状态查询已流失的客户（客户流失分析）
+     * @param status
+     * @return
+     */
+    public List<CstLost> findCstLostByStatus(String status);
+
 }

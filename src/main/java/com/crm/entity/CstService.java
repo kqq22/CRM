@@ -40,6 +40,7 @@ public class CstService implements Serializable {
 
     private String svrDealBy;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date svrDealDate;
 
     private String svrResult;
@@ -49,6 +50,8 @@ public class CstService implements Serializable {
     private String svrStartDate;
 
     private String svrEndDate;
+
+    private Integer serviceNumber;
 
     private static final long serialVersionUID = 1L;
 
@@ -218,5 +221,13 @@ public class CstService implements Serializable {
 
     public void setSvrEndDate(String svrEndDate) {
         this.svrEndDate = svrEndDate;
+    }
+
+    public Integer getServiceNumber() {
+        return serviceNumber;
+    }
+
+    public void setServiceNumber(Integer serviceNumber) {
+        this.serviceNumber = serviceNumber;
     }
 }

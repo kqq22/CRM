@@ -47,6 +47,16 @@ public class CstServiceServiceImpl implements CstServiceService {
     }
 
     /**
+     * 根据id查询服务管理
+     * @param id
+     * @return
+     */
+    @Override
+    public CstService findCstServiceById(Integer id) {
+        return cstServiceMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * 添加指派人
      * @param cstService
      * @return
@@ -54,5 +64,45 @@ public class CstServiceServiceImpl implements CstServiceService {
     @Override
     public int udpateService(CstService cstService) {
         return cstServiceMapper.updateByPrimaryKey(cstService);
+    }
+
+    /**
+     * 删除服务管理记录
+     * @param id
+     * @return
+     */
+    @Override
+    public int delService(Integer id) {
+        return cstServiceMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 服务处理
+     * @param cstService
+     * @return
+     */
+    @Override
+    public int updateCstServiceDetail(CstService cstService) {
+        return cstServiceMapper.updateByPrimaryKey(cstService);
+    }
+
+    /**
+     * 服务反馈
+     * @param cstService
+     * @return
+     */
+    @Override
+    public int updateCstServiceResult(CstService cstService) {
+        return cstServiceMapper.updateByPrimaryKey(cstService);
+    }
+
+    /**
+     * 查询客户服务分析
+     * @param CreateDate
+     * @return
+     */
+    @Override
+    public List<CstService> findCstServiceReport(String CreateDate) {
+        return cstServiceMapper.selectServiceReport(CreateDate);
     }
 }

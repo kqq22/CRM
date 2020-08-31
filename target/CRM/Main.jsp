@@ -154,18 +154,18 @@
                         <div class="contentDiv" style="display:none">
                             <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceCreate.jsp">服务创建</a></span></div>
                             <div><img src="images/left.gif" /><span><a href="#" url="/findUser">服务分配</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceDispose.jsp">服务处理</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceResult.jsp">服务反馈</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="CustomerService/ServiceDetail.jsp">服务归档</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="/findUserDispose">服务处理</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="/findUserResult">服务反馈</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="/findUserDetail">服务归档</a></span></div>
                         </div>
                         <!--父菜单 -->
                         <div class="menuDiv">统计报表</div>
                         <!--子菜单 -->
                         <div class="contentDiv" style="display:none">
-                            <div><img src="images/left.gif" /><span><a href="#" url="Report/ContributeReport.html">客户贡献分析</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="Report/MakeReport.html">客户构成分析</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="Report/ServerReport.html">客户服务分析</a></span></div>
-                            <div><img src="images/left.gif" /><span><a href="#" url="Report/LostReport.html">客户流失分析</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="/findContributeReport">客户贡献分析</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="/findCstCustomerMakeReport">客户构成分析</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="/findCstServiceReport">客户服务分析</a></span></div>
+                            <div><img src="images/left.gif" /><span><a href="#" url="/findCstLostByStatus">客户流失分析</a></span></div>
                         </div>
                         <!--父菜单 -->
                         <div class="menuDiv">基础数据</div>
