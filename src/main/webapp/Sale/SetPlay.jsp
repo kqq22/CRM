@@ -16,34 +16,6 @@
     <link href="../CSS/Style1.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
     <script type="text/javascript">
-        $(function () {
-            //创建时间
-            var chcCreateDate = $("#chcCreatDate").val();
-            var createDate=chcCreateDate.trim().split(" ");
-            var crdate = createDate[0]+" "+createDate[1]+" "+createDate[2]+" "+createDate[5]+" "+createDate[3]+" GMT+0800";
-            var cdate = new Date(Date.parse(crdate));
-            var y = cdate.getFullYear();
-            var m = cdate.getMonth() + 1;
-            m = m < 10 ? ('0' + m) : m;
-            var d = cdate.getDate();
-            d = d < 10 ? ('0' + d) : d;
-            var created = y+"-"+m+"-"+d;
-            $("#createDate").text(created);
-
-            //指派时间
-            var chcdueDate = $("#chcdueDate").val();
-            var dueDate=chcdueDate.trim().split(" ");
-            var dudate = dueDate[0]+" "+dueDate[1]+" "+dueDate[2]+" "+dueDate[5]+" "+dueDate[3]+" GMT+0800";
-            var ddate = new Date(Date.parse(dudate));
-            var dy = ddate.getFullYear();
-            var dm = ddate.getMonth() + 1;
-            dm = dm < 10 ? ('0' + dm) : dm;
-            var dd = ddate.getDate();
-            dd = dd < 10 ? ('0' + dd) : dd;
-            var dued = dy+"-"+dm+"-"+dd;
-            $("#dueDate").text(dued);
-        });
-
         function update(chcid,plaid) {
             var plaTodo = document.getElementById("plaTodo").value;
             location.href="/updateSalPlan?chcid="+chcid+"&plaid="+plaid+"&plaTodo="+plaTodo;
@@ -93,13 +65,13 @@
         <th>创建人：</th>
         <td>${sessionScope.uname}</td>
         <th>创建时间：</th>
-        <td id="createDate"><input id="chcCreatDate" value="${salChance.chcCreateDate}" type="text" style="display: none;"></td>
+        <td><fmt:formatDate value="${salChance.chcCreateDate}" pattern="yyyy-MM-dd"/></td>
     </tr>
     <tr>
         <th>指派人：</th>
         <td>${salChance.chcDueTo}</td>
         <th>指派时间：</th>
-        <td id="dueDate"><input id="chcdueDate" value="${salChance.chcDueDate}" type="text" style="display: none;"></td>
+        <td><fmt:formatDate value="${salChance.chcDueDate}" pattern="yyyy-MM-dd"/></td>
     </tr>
 </table>
 <p>

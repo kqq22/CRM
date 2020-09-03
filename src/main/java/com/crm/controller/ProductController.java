@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 /**
  * 产品信息分控制器
@@ -21,21 +20,22 @@ public class ProductController {
     private ProductService productService;
 
     /**
-     * 分页查询
-     * @param pageNum
+     * 分页查询+模糊查询
+     * @param pageNum 页码
      * @return
      */
     @RequestMapping(value="/getProductAll",method= RequestMethod.GET)
     @ResponseBody
     public PageInfo<Product> getProductAll(@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum,String name,String type,String batch){
-        int pageNum1 = pageNum==null?1:pageNum;
-        //必须放在list前面
-        PageHelper.startPage(pageNum1,3);
+        //必须放在list前面 分页帮助类 插件
+        PageHelper.startPage(pageNum,3);
         //调用业务类查询方法
         List<Product> list;
         if(name==""&&type==""&&batch==""){
+            //为空，调用查询所有订单详细信息方法
             list = productService.findProductAll();
         }else {
+            //根据条件进行模糊查询
             Product product = new Product("%"+name+"%","%"+type+"%","%"+batch+"%");
             list = productService.findProductByExample(product);
         }

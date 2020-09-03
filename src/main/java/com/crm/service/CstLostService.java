@@ -29,7 +29,7 @@ public interface CstLostService {
     public CstLost findCstLostById(Integer id);
 
     /**
-     * 修改客户流失信息（追加暂缓流失措施）
+     * 修改客户流失信息（追加暂缓流失措施，添加流失信息）
      * @param cstLost
      * @return
      */
@@ -41,5 +41,12 @@ public interface CstLostService {
      * @return
      */
     public List<CstLost> findCstLostByStatus(String status);
+
+    /**
+     * 添加客户流失信息
+     * @param cstLost 客户流失对象
+     * @return
+     */
+    public int addCstLost(CstLost cstLost);
 
 }

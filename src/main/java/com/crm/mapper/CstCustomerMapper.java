@@ -29,6 +29,10 @@ public interface CstCustomerMapper {
 
     List<CstCustomer> mySelectByExample(CstCustomer record);
 
+    List<CstCustomer> selectLost();
+
+    List<CstCustomer> selectLostCustNo();
+
     int updateByExampleSelective(@Param("record") CstCustomer record, @Param("example") CstCustomerExample example);
 
     int updateByExample(@Param("record") CstCustomer record, @Param("example") CstCustomerExample example);

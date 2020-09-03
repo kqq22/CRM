@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -24,23 +23,27 @@ public class CstCustomerController {
     private CstCustomerService cstCustomerService;
 
     /**
-     * 分页查询
-     * @param pageNum
+     * 分页查询+模糊查询
+     * @param pageNum 页码
+     * @param cstCustomer 客户信息对象
      * @return
      */
     @RequestMapping(value="/getCstCustomerAll",method= RequestMethod.GET)
     @ResponseBody
     public PageInfo<CstCustomer> getCstCustomerAll(@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum, CstCustomer cstCustomer) {
-        //必须放在list前面
+        //必须放在list前面 分页帮助类 插件
         PageHelper.startPage(pageNum, 3);
         //调用业务类查询方法
         List<CstCustomer> list;
+        //判断选项是否为全部，为全部就赋值为空，查询所有客户信息
         if(cstCustomer.getCustRegion().equals("全部")){
             cstCustomer.setCustRegion("");
         }
         if (cstCustomer.getCustName().equals("") && cstCustomer.getCustNo().equals("") && cstCustomer.getCustRegion().equals("") && cstCustomer.getCustManagerName().equals("")&&cstCustomer.getCustLevel()==0) {
+            //查询所有客户信息
             list = cstCustomerService.findCstCustomerAll();
         } else {
+            //根据条件进行模糊查询
             list = cstCustomerService.findCstCustomerByExample(cstCustomer);
         }
         PageInfo<CstCustomer> pageInfo = new PageInfo<>(list);
@@ -48,8 +51,8 @@ public class CstCustomerController {
     }
 
     /**
-     * 查询单个CstCustomer
-     * @param no
+     * 查询单个CstCustomer （跳转到客户信息编辑页面）
+     * @param no 客户编号
      * @param m
      * @return
      */
@@ -62,24 +65,19 @@ public class CstCustomerController {
 
     /**
      * 修改客户信息
-     * @param cstCustomer
+     * @param cstCustomer 客户信息对象
      * @return
      */
     @RequestMapping("/updateCstCustomer")
-    public String updateCstCustomer(CstCustomer cstCustomer, HttpServletRequest request){
+    public String updateCstCustomer(CstCustomer cstCustomer){
         int row = cstCustomerService.updateCstCustomerByNo(cstCustomer);
-        if (row==1){
-            System.out.println(row);
-            return "/Customer/CustomerPage";
-        }else{
-            System.out.println(row);
-            return "";
-        }
+        return "/Customer/CustomerPage";
+
     }
 
     /**
      * 删除客户信息
-     * @param no
+     * @param no 客户编号
      * @return
      */
     @RequestMapping("/delCstCustomer")
@@ -93,8 +91,9 @@ public class CstCustomerController {
      * @return
      */
     @RequestMapping("/findCstCustomerMakeReport")
-    public String findCstCustomerMakeReport(HttpServletRequest request,Model m){
-        String contribute = request.getParameter("contribute");
+    public String findCstCustomerMakeReport(HttpServletRequest request, Model m){
+        //获取参数
+        String contribute = request.getParameter("contribute");//报表方式
         List<CstCustomer> cstCustomerList =  cstCustomerService.findCstCustomerMakeReport(contribute);
         m.addAttribute("cstCustomerList",cstCustomerList);
         return "/Report/MakeReport";

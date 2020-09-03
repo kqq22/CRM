@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>客户联系人管理</title>
     <link href="../CSS/Style1.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/Style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -18,6 +18,7 @@
             $("#CustNo").text($("#lkmCustNo").val());
             $("#CusName").text($("#lkmCustName").val());
         });
+        //新建
         function select() {
             var lkmId = $("#lkmId").val();
             location.href="/findCstLinkmanBylkmId?lkmId="+lkmId;

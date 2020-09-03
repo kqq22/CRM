@@ -7,24 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date"/>
 <html>
 <head>
     <title>Title</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            //当前日期
-            var date = new Date();
-            this.year = date.getFullYear();
-            this.month = date.getMonth() + 1;
-            this.date = date.getDate();
-            this.month = this.month < 10 ? ('0' + this.month) : this.month;
-            this.date = this.date < 10 ? ('0' + this.date) : this.date;
-            var currentTime =  this.year + "-" + this.month + "-" + this.date;
-            $("#currentTime").val(currentTime);
-        });
-    </script>
 </head>
 <body>
 <form method="post" action="/addSalChance">
@@ -68,14 +56,14 @@
         <th>创建人</th>
         <td><input type="text" readonly="readonly" id="username" value="<%=session.getAttribute("uname") %>" name="chcCreateBy"/></td>
         <th>创建时间</th>
-        <td ><input type="text" readonly="readonly" id="currentTime" name="createdate"/></td>
+        <td >
+            <input type="text" readonly="readonly" value="<fmt:formatDate value='${now}' pattern='yyyy-MM-dd'/>"/></td>
     </tr>
     <tfoot>
     <tr>
         <td colspan="4">
             <input type="submit" value="确定并返回" />&nbsp;&nbsp;
-            <input type="button" value="确定并继续" />&nbsp;&nbsp;
-            <input type="button" value="返回" />
+            <a href="/Sale/SaleChance.jsp"><input type="button" value="返回" /></a>
         </td>
     </tr>
     </tfoot>

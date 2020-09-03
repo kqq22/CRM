@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>新建联系人</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
 </head>
 <body>

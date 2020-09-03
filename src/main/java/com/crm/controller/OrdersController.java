@@ -1,6 +1,5 @@
 package com.crm.controller;
 
-import com.crm.entity.CstCustomer;
 import com.crm.entity.Orders;
 import com.crm.service.OrdersService;
 import com.github.pagehelper.PageHelper;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -26,13 +24,13 @@ public class OrdersController {
 
     /**
      * 分页查询
-     * @param pageNum
+     * @param pageNum 页码
      * @return
      */
     @RequestMapping(value="/findOrdersAll",method= RequestMethod.GET)
     @ResponseBody
     public PageInfo<Orders> getCstCustomerAll(@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum, String custName) {
-        //必须放在list前面
+        //必须放在list前面 分页帮助类 插件
         PageHelper.startPage(pageNum, 3);
         //调用业务类查询方法
         List<Orders> list = ordersService.findOrdersAll(custName);
@@ -40,8 +38,16 @@ public class OrdersController {
         return pageInfo;
     }
 
+    /**
+     * 跳转到分页查询方法
+     * 将客户编号和客户名称存入model中，用于页面显示
+     * @param cName 客户编号
+     * @param cNo 客户名称
+     * @param m
+     * @return
+     */
     @RequestMapping("/findOrdersAlls")
-    public String findOrdersAlls(String cName,String cNo, Model m){
+    public String findOrdersAlls(String cName, String cNo, Model m){
         m.addAttribute("cName",cName);
         m.addAttribute("cNo",cNo);
         return "/Customer/OrderPage";
@@ -56,18 +62,17 @@ public class OrdersController {
      */
     @RequestMapping("/findContributeReport")
     public String findContributeReport(HttpServletRequest request, Model m){
+        //获取参数
         String odrCustomer = request.getParameter("odrCustomer");
         String odrDate = request.getParameter("odrDate");
-        System.out.println(odrCustomer+"--"+odrDate);
+        //判断条件是否为null，如果为null，重新赋值为字符串的空""
         if(odrCustomer==null){
             odrCustomer ="";
         }
         if(odrDate==null){
             odrDate ="";
         }
-        System.out.println(odrCustomer+"--"+odrDate);
         List<Orders> ordersList = ordersService.findContributeReport(odrCustomer,odrDate);
-        System.out.println(ordersList.size());
         m.addAttribute("ordersList",ordersList);
         return "/Report/ContributeReport";
 

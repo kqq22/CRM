@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>客户流失管理</title>
     <link href="../CSS/Style4.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -31,12 +31,14 @@
                     global(index);
                 }
             );
+
             //上一页
             $("#pre").click(
                 function () {
                     global($perPage);
                 }
             );
+
             //下一页
             $("#next").click(
                 function () {
@@ -46,10 +48,9 @@
                     }else{
                         global($pageNum);
                     }
-
-
                 }
             );
+
             //最后一页
             $("#last").click(
                 function () {
@@ -80,7 +81,6 @@
                     nav(CstLostJson);
                 }
             });
-
         }
 
         /**
@@ -109,6 +109,25 @@
              * 循环读取数据，并将数据写入表格
              */
             $(CstLostJson.list).each(function(index,cstlost){
+                /**
+                 * 给最后下单时间和流失时间加一天
+                 * @returns {string}
+                 */
+                function myFunction(date){
+                    var date= new Date(Date.parse(date));
+                    var y = date.getFullYear();
+                    var m = date.getMonth()+1;
+                    var d = date.getDate()+1;
+                    m = m < 10 ? ('0' + m) : m;
+                    d = d < 10 ? ('0' + d) : d;
+                    if(y+'-'+m+'-'+d=='NaN-NaN-NaN'){
+                        return "";
+                    }else {
+                        return y+'-'+m+'-'+d;
+                    }
+
+                };
+
                 //创建一行
                 var $tr=$("<tr></tr>");
                 //创建一列
@@ -124,9 +143,9 @@
                 $lstCustNotd.text(cstlost.lstCustNo);
                 $lstCustNametd.text(cstlost.lstCustName);
                 $lstCustManagerNametd.text(cstlost.lstCustManagerName);
-                $lstLastOrderDatetd.text(cstlost.lstLastOrderDate);
-                $lstLostDatetd.text(cstlost.lstLostDate);
-
+                $lstLastOrderDatetd.text(myFunction(cstlost.lstLastOrderDate));
+                $lstLostDatetd.text(myFunction(cstlost.lstLostDate));
+                //客户流失状态
                 if(cstlost.lstStatus==1){
                     $lstStatustd.text("预警");
                     $cz.html("<a href='/findCstLostById?id="+cstlost.lstId+"'><img src='../images/bt_relay.gif' title='暂缓流失' style='border:0px' /></a>\n" +
@@ -136,8 +155,8 @@
                     $cz.html("<a href='/findCstLostById?id="+cstlost.lstId+"'><img src='../images/bt_relay.gif' title='暂缓流失' style='border:0px' /></a>\n" +
                         "<a href='/findCstLostByIds?id="+cstlost.lstId+"'><img src='../images/bt_confirm.gif' title='确认流失' style='border:0px' /></a>");
                 }else {
-                    $cz.html("<a href='/findCstLostByIdLook?id="+cstlost.lstId+"'><img src='../images/bt_plan.gif' title='查看' style='border:0px' /></a>");
                     $lstStatustd.text("确认流失");
+                    $cz.html("<a href='/findCstLostByIdLook?id="+cstlost.lstId+"'><img src='../images/bt_plan.gif' title='查看' style='border:0px' /></a>");
                 }
 
                 //把列添加到行

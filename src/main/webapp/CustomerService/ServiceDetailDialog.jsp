@@ -10,7 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>服务信息</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -76,9 +76,9 @@
                 ☆☆
             </td>
         </c:if><c:if test="${cstService.svrSatisfy==3}">
-        <td>
-            ☆☆☆
-        </td>
+            <td>
+                ☆☆☆
+            </td>
         </c:if>
         <c:if test="${cstService.svrSatisfy==4}">
             <td>
@@ -98,7 +98,7 @@
     <tfoot>
     <tr>
         <td colspan="4">
-            <input type="button" value="返回"/>
+            <a href="/CustomerService/ServiceDetail.jsp"><input type="button" value="返回"/></a>
         </td>
     </tr>
     </tfoot>

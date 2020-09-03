@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>客户基本信息</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -18,7 +18,7 @@
     <input value="${cstCustomer.custManagerId}" name="custManagerId" style="display: none;">
     <input value="${cstCustomer.custManagerName}" name="custManagerName" style="display: none;">
     <input value="${cstCustomer.custStatus}" name="custStatus" style="display: none;">
-<table class="tableEdit"><input value="${cstCustomer.custNo}" name=
+<table class="tableEdit">
     <thead>
     <tr>
         <td colspan="4">客户基本信息</td>
@@ -62,21 +62,21 @@
         <th>客户满意度：</th>
         <td>
             <select name="custSatisfy">
-                <option value="1">☆</option>
-                <option value="2">☆☆</option>
-                <option value="3">☆☆☆</option>
-                <option value="4">☆☆☆☆</option>
-                <option value="5">☆☆☆☆☆</option>
+                <option value="1" <c:if test="${cstCustomer.custSatisfy==1}"> selected="selected"</c:if>>☆</option>
+                <option value="2" <c:if test="${cstCustomer.custSatisfy==2}"> selected="selected"</c:if>>☆☆</option>
+                <option value="3" <c:if test="${cstCustomer.custSatisfy==3}"> selected="selected"</c:if>>☆☆☆</option>
+                <option value="4" <c:if test="${cstCustomer.custSatisfy==4}"> selected="selected"</c:if>>☆☆☆☆</option>
+                <option value="5" <c:if test="${cstCustomer.custSatisfy==5}"> selected="selected"</c:if>>☆☆☆☆☆</option>
             </select>
         </td>
         <th>客户信用度：</th>
         <td>
             <select name="custCredit">
-                <option value="1">☆</option>
-                <option value="2">☆☆</option>
-                <option value="3">☆☆☆</option>
-                <option value="4">☆☆☆☆</option>
-                <option value="5">☆☆☆☆☆</option>
+                <option value="1" <c:if test="${cstCustomer.custCredit==1}"> selected="selected"</c:if>>☆</option>
+                <option value="2" <c:if test="${cstCustomer.custCredit==2}"> selected="selected"</c:if>>☆☆</option>
+                <option value="3" <c:if test="${cstCustomer.custCredit==3}"> selected="selected"</c:if>>☆☆☆</option>
+                <option value="4" <c:if test="${cstCustomer.custCredit==4}"> selected="selected"</c:if>>☆☆☆☆</option>
+                <option value="5" <c:if test="${cstCustomer.custCredit==5}"> selected="selected"</c:if>>☆☆☆☆☆</option>
             </select>
         </td>
     </tr>

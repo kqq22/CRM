@@ -20,22 +20,21 @@ public class CstLinkmanController {
 
     /**
      * 根据客户信息管理编号查询联系人
-     * @param no
      * @param m
      * @return
      */
     @RequestMapping("/findCstLinkmanByNo")
-    public String findCstLinkmanByNo(String no, Model m, HttpServletRequest request){
-        no = request.getParameter("no");
+    public String findCstLinkmanByNo(Model m, HttpServletRequest request){
+        String no = request.getParameter("no");//编号
+        //调用查询方法
         List<CstLinkman> linkmanList = cstLinkmanService.findCstLinkmanByNo(no);
         m.addAttribute("linkmanList",linkmanList);
         return "Customer/LinkManPage";
     }
 
-
     /**
-     * 根据id查询联系人
-     * @param id
+     * 根据id查询联系人信息（跳转到编辑联系人页面）
+     * @param id 联系人id
      * @param m
      * @return
      */
@@ -47,8 +46,8 @@ public class CstLinkmanController {
     }
 
     /**
-     * 根据id查询联系人（跳转到新建页面）
-     *
+     * 根据id查询联系人（跳转到新建联系人页面）
+     * @param lkmId 联系人id
      * @param m
      * @return
      */
@@ -61,43 +60,40 @@ public class CstLinkmanController {
 
     /**
      * 添加联系人
-     * @param cstLinkman
+     * @param cstLinkman 联系人对象
      * @return
      */
     @RequestMapping("/addCstLinkman")
-    public void addCstLinkman(CstLinkman cstLinkman,Model m,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("getLkmCustNo:"+cstLinkman.getLkmCustNo());
+    public void addCstLinkman(CstLinkman cstLinkman, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int row = cstLinkmanService.addCstLinkman(cstLinkman);
-        if (row==1) {
-            request.getRequestDispatcher("/findCstLinkmanByNo?no="+cstLinkman.getLkmCustNo()).forward(request,response);
-        }
+        request.getRequestDispatcher("/findCstLinkmanByNo?no="+cstLinkman.getLkmCustNo()).forward(request,response);
     }
 
     /**
      * 修改联系人信息
-     * @param cstLinkman
+     * @param cstLinkman 联系人对象
      * @return
      */
     @RequestMapping("/updateCstLinkman")
-    public void updateCstLinkman(CstLinkman cstLinkman, Model m, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void updateCstLinkman(CstLinkman cstLinkman, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int row = cstLinkmanService.updateLinkman(cstLinkman);
-        String no = cstLinkman.getLkmCustNo();
+        String no = cstLinkman.getLkmCustNo();//编号
+        //存放，用于页面显示
         request.setAttribute("no",no);
         request.getRequestDispatcher("/findCstLinkmanByNo?no="+no).forward(request,response);
     }
 
     /**
      * 删除联系人
-     * @param lkmId
-     * @param lkmcustNo
+     * @param lkmId 联系人id
+     * @param lkmcustNo 客户编号
      * @param request
      * @param response
      */
     @RequestMapping("/delCstLinkman")
-    public void delCstLinkman(Integer lkmId,String lkmcustNo,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    public void delCstLinkman(Integer lkmId, String lkmcustNo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int row = cstLinkmanService.delLinkman(lkmId);
         request.getRequestDispatcher("/findCstLinkmanByNo?no="+lkmcustNo).forward(request,response);
-
     }
 }
 

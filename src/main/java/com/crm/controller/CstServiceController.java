@@ -53,7 +53,7 @@ public class CstServiceController {
 
     /**
      *
-     * 分页查询+模糊查询（服务分配）
+     * 分页查询+模糊查询（服务分配）（服务归档）
      * @param pageNum
      * @return
      */
@@ -85,7 +85,7 @@ public class CstServiceController {
     }
 
     /**
-     * 查询所有用户
+     * 查询所有用户（跳转到服务分配）
      * @param m
      * @return
      */
@@ -186,7 +186,7 @@ public class CstServiceController {
     }
 
     /**
-     * 根据id查询服务管理信息 (跳转到服务反馈页面)
+     * 根据id查询服务管理信息 (跳转到服务归档查看详情页面)
      * @param id
      * @param m
      * @return
@@ -216,7 +216,7 @@ public class CstServiceController {
     }
 
     /**
-     * 服务处理
+     * 服务反馈
      * @param cstService
      */
     @RequestMapping("/updateCstServiceResult")

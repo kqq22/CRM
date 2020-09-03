@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>服务处理</title>
     <link href="../CSS/Style1.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/Style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -27,12 +27,14 @@
                     global(index);
                 }
             );
+
             //上一页
             $("#pre").click(
                 function () {
                     global($perPage);
                 }
             );
+
             //下一页
             $("#next").click(
                 function () {
@@ -46,6 +48,7 @@
 
                 }
             );
+
             //最后一页
             $("#last").click(
                 function () {
@@ -75,7 +78,6 @@
                     nav(CstServiceJson);
                 }
             });
-
         }
 
         /**
@@ -121,6 +123,7 @@
                 $svrTypetd.text(cstservice.svrType);
                 $svrCreateBytd.text(cstservice.svrCreateBy);
                 $svrCreateDatetd.text(cstservice.svrCreateDate);
+                //判断服务状态是否为已分配
                 if(cstservice.svrStatus=="已分配"){
                     $cz.html("<a href='/findCstServiceById?id="+cstservice.svrId+"'><img src='../images/bt_deal.gif' style='border:0px' /></a>");
                 }

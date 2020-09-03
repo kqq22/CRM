@@ -10,7 +10,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>服务分配</title>
     <link href="../CSS/Style1.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/Style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -77,7 +77,6 @@
                     nav(CstServiceJson);
                 }
             });
-
         }
 
         /**
@@ -124,6 +123,7 @@
                 $svrTypetd.text(cstservice.svrType);
                 $svrCreateBytd.text(cstservice.svrCreateBy);
                 $svrCreateDatetd.text(cstservice.svrCreateDate);
+                //判断是否是服务状态新创建
                 if(cstservice.svrStatus=="新创建"){
                     $svrStatustd.html("<input style='display: none;' name='svrCustName' value='"+cstservice.svrCustName+"'/>" +
                         "<input style='display: none;' name='svrTitle' value='"+cstservice.svrTitle+"'/>" +

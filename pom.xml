@@ -137,6 +137,7 @@
       <artifactId>slf4j-nop</artifactId>
       <version>1.7.2</version>
     </dependency>
+    <!-- jstl jar包依赖 c标签 -->
     <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
     <dependency>
       <groupId>jstl</groupId>
@@ -159,19 +160,12 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.11</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.11</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
       <version>3.2.2</version>
     </dependency>
-
     <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
     <dependency>
       <groupId>commons-logging</groupId>
@@ -184,6 +178,7 @@
       <artifactId>ezmorph</artifactId>
       <version>1.0.6</version>
     </dependency>
+    <!-- Json对象 -->
     <!-- https://mvnrepository.com/artifact/org.json/json -->
     <dependency>
       <groupId>org.json</groupId>
@@ -196,13 +191,14 @@
       <artifactId>pagehelper</artifactId>
       <version>5.1.10</version>
     </dependency>
+    <!-- junit jar包依赖 单元测试 -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>RELEASE</version>
       <scope>compile</scope>
     </dependency>
-
+    <!-- fmtJar包 用于页面日期格式化 -->
     <!-- https://mvnrepository.com/artifact/taglibs/fmt -->
     <dependency>
       <groupId>taglibs</groupId>

@@ -131,6 +131,30 @@
         order by count(*)
     </select>
 
+    <select id="selectLost" parameterType="com.crm.entity.CstCustomerExample" resultMap="BaseResultMap">
+        select c.cust_no,c.cust_name,c.cust_manager_id,c.cust_manager_name,d.bmaxodrdate
+        from cst_customer c inner join (
+        select b.odr_customer 'bodr_customer',b.maxodrdate 'bmaxodrdate'
+        from  orders a inner join (
+        select odr_customer,max(odr_date) 'maxodrdate'
+        from orders group by odr_customer) b
+        on a.odr_customer = b.odr_customer
+        and a.odr_date = b.maxodrdate
+        and datediff(now(),b.maxodrdate)>180) d
+        where c.cust_name=d.bodr_customer
+    </select>
+
+    <select id="selectLostCustNo" parameterType="com.crm.entity.CstCustomerExample" resultMap="BaseResultMap">
+           SELECT cust_no from cst_customer
+           WHERE cust_no in (select c.cust_no from cst_customer c INNER JOIN (
+           SELECT b.odr_customer 'bodr_customer',b.maxodrdate 'bmaxodrdate' FROM  orders a INNER JOIN (
+           SELECT odr_customer,MAX(odr_date) 'maxodrdate' FROM orders
+           GROUP BY odr_customer) b
+           ON a.odr_customer = b.odr_customer
+           AND a.odr_date = b.maxodrdate
+           AND TIMESTAMPDIFF(MONTH,odr_date,NOW())>6)d WHERE c.cust_name=d.bodr_customer) and cust_status !='2';
+    </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -304,6 +328,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update cst_customer
     <set>

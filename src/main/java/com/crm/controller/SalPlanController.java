@@ -24,7 +24,7 @@ public class SalPlanController {
 
     /**
      * 根据销售机会id查询销售计划
-     * @param id
+     * @param id 销售机会管理id
      * @param m
      * @return
      */

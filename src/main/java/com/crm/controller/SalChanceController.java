@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,32 +28,36 @@ import java.util.List;
  */
 @Controller
 public class SalChanceController {
+    //注入销售机会管理业务逻辑接口
     @Autowired
     private SalChanceService salChanceService;
 
+    //注入用户业务逻辑接口
     @Autowired
     private SysUserService sysUserService;
 
+    //注入客户开发计划业务逻辑接口
     @Autowired
     private SalPlanService salPlanService;
 
     /**
-     * SalChance
+     * SalChance 销售机会管理
      * 分页查询+模糊查询
-     * @param pageNum
+     * @param pageNum 页码
      * @return
      */
     @RequestMapping(value="/findSalChanceAll",method= RequestMethod.GET)
     @ResponseBody
     public PageInfo<SalChance> findSalChanceAll(@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum, String name, String linkman, String title){
-        int pageNum1 = pageNum==null?1:pageNum;
         //必须放在list前面  分页帮助类 插件
-        PageHelper.startPage(pageNum1,3);
+        PageHelper.startPage(pageNum,3);
         //调用业务类查询方法
         List<SalChance> list;
         if(name==""&&linkman==""&&title==""){
+            //条件为空，调用查询所有销售机会管理信息的方法
             list = salChanceService.findSalChanceAll();
         }else {
+            //根据条件进行模糊查询
             SalChance salChance = new SalChance("%"+name+"%","%"+linkman+"%","%"+title+"%");
             list = salChanceService.findSalChanceByExample(salChance);
         }
@@ -64,19 +67,19 @@ public class SalChanceController {
     }
 
     /**
-     * SaleManager
+     * SaleManager 客户开发计划
      * 分页查询+模糊查询
-     * @param pageNum
+     * @param pageNum 页码
      * @return
      */
     @RequestMapping(value="/findSaleManagerAll",method= RequestMethod.GET)
     @ResponseBody
     public PageInfo<SalChance> findSaleManagerAll(@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum, String name, String linkman, String title,String status){
-        int pageNum1 = pageNum==null?1:pageNum;
         //必须放在list前面  分页帮助类 插件
-        PageHelper.startPage(pageNum1,3);
+        PageHelper.startPage(pageNum,3);
         //调用业务类查询方法
         List<SalChance> list;
+        //判断是否为空，如果为空，重新复制为字符串的空""
         if (name==null){
             name="";
         }
@@ -90,24 +93,27 @@ public class SalChanceController {
             status="";
         }
         Integer statu = 0;
+        //判断状态
         if (status.equals("开发中")){
-            System.out.println(status);
             statu = 2;
         }else if (status.equals("开发成功")){
-            System.out.println(status);
             statu = 3;
         }else if (status.equals("开发失败")){
             statu = 4;
         }else if (status.equals("全部")){
             statu = 1;
         }
+
         if(name==""&&linkman==""&&title==""&&statu==0){
+            //为空，调用查询所有客户开发计划信息的方法
             list = salChanceService.findSalManagerAll();
         }else if(statu==1){
+            //根据条件进行模糊查询
             SalChance salChances = new SalChance("%"+name+"%","%"+linkman+"%","%"+title+"%");
             salChances.setChcStatus(statu);
             list = salChanceService.findSalManagerByExamples(salChances);
         }else {
+            //根据条件进行模糊查询
             SalChance salChances = new SalChance("%"+name+"%","%"+linkman+"%","%"+title+"%");
             salChances.setChcStatus(statu);
             list = salChanceService.findSalManagerByExample(salChances);
@@ -120,16 +126,15 @@ public class SalChanceController {
     /**
      * 添加销售机会管理记录
      * @param request
-     * @param response
      * @throws IOException
      */
     @RequestMapping("/addSalChance")
-    public String addSalChance(SalChance salChance,HttpServletRequest request, HttpServletResponse response,String createdate) throws IOException, ParseException {
+    public String addSalChance(SalChance salChance, HttpServletRequest request, String createdate) throws ParseException {
         HttpSession session = request.getSession();
-        //转换日期
+        //日期处理
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date cdate = sdf.parse(createdate);
-        int id = Integer.parseInt(session.getAttribute("uid").toString());
+        Date cdate = sdf.parse(createdate);//创建时间
+        int id = Integer.parseInt(session.getAttribute("uid").toString());//当前用户id
         salChance.setChcCreateDate(cdate);
         salChance.setChcCreateId(id);
         //调用添加方法
@@ -142,14 +147,16 @@ public class SalChanceController {
     }
 
     /**
-     * 根据id查询单个SaleChance，跳转到销售机会分配
-     * @param id
+     * 根据id查询单个SaleChance（跳转到销售机会分配页面）
+     * @param id 销售机会管理id
      * @param m
      * @return
      */
     @RequestMapping("/findSaleChanceById")
     public String findSaleChanceById(Integer id, Model m){
+        //查询单个SaleChance
         SalChance salChance = salChanceService.findSalChanceById(id);
+        //查询所有用户
         List<SysUser> sysUserList = sysUserService.findSysUser();
         m.addAttribute("sysUserList",sysUserList);
         m.addAttribute("salChance",salChance);
@@ -157,28 +164,32 @@ public class SalChanceController {
     }
 
     /**
-     * 根据id查询单个SaleChance，跳转到制定计划
-     * @param id
+     * 根据id查询单个SaleChance（跳转到制定计划页面）
+     * @param id 销售机会管理id
      * @param m
      * @return
      */
     @RequestMapping("/findSaleManagerById")
-    public String findSaleManagerById(Integer id,Model m){
+    public String findSaleManagerById(Integer id, Model m){
+        //根据id查询单个SaleChance
         findSaleChanceById(id,m);
+        //根据id查询客户开发计划信息
         List<SalPlan> salPlanList =  salPlanService.findSalPlanBySalChanceId(id);
         m.addAttribute("salPlanList",salPlanList);
         return "/Sale/SetPlay";
     }
 
     /**
-     * 根据id查询单个SaleChance，跳转到执行计划
-     * @param id
+     * 根据id查询单个SaleChance（跳转到执行计划页面）
+     * @param id 销售计划管理id
      * @param m
      * @return
      */
     @RequestMapping("/findSaleManagersyIds")
-    public String findSaleManagersyIds(Integer id,Model m){
+    public String findSaleManagersyIds(Integer id, Model m){
+        //根据id查询单个SaleChance
         findSaleChanceById(id,m);
+        //根据id查询客户开发计划信息
         List<SalPlan> salPlanList =  salPlanService.findSalPlanBySalChanceId(id);
         m.addAttribute("salPlanList",salPlanList);
         return "/Sale/ExecPlay";
@@ -186,7 +197,7 @@ public class SalChanceController {
 
     /**
      * EditSale
-     * 根据id查询单个SaleChance，跳转到修改销售计划管理
+     * 根据id查询单个SaleChance（跳转到修改销售计划管理页面）
      * @param id
      * @param m
      * @return
@@ -218,16 +229,19 @@ public class SalChanceController {
      */
     @RequestMapping("/updateSaleChanceDueTo")
     public String updateSaleChanceDueTo(SalChance salChance,HttpServletRequest request) throws ParseException {
+        //获取参数
         String currentTime = request.getParameter("cTime");
         int chcId = Integer.parseInt(request.getParameter("chcId"));
         int userid = Integer.parseInt(request.getParameter("userid"));
         String username = request.getParameter("userName");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //设置参数
         salChance.setChcId(chcId);
         salChance.setChcDueDate(sdf.parse(currentTime));
         salChance.setChcDueId(userid);
         salChance.setChcDueTo(username);
         salChance.setChcStatus(2);
+        //调用修改方法
         int row = salChanceService.updateSalChanceById(salChance);
         if (row==1){
             return "/Sale/SaleChance";
@@ -238,7 +252,7 @@ public class SalChanceController {
 
     /**
      * 修改销售机会开发状态
-     * @param salChance
+     * @param salChance 销售机会管理对象
      * @return
      */
     @RequestMapping("/updateSaleChanceStatus")
@@ -246,15 +260,18 @@ public class SalChanceController {
         int row = salChanceService.updateSalChanceById(salChance);
         return "/Sale/SaleManager";
     }
+
     /**
      * 修改销售机会管理指派人
      * @param salChance
      * @param request
      */
     @RequestMapping("/updateSaleChance")
-    public String updateSaleChance(SalChance salChance,HttpServletRequest request){
-        int chcId = Integer.parseInt(request.getParameter("chcId"));
+    public String updateSaleChance(SalChance salChance, HttpServletRequest request){
+        //获取参数
+        int chcId = Integer.parseInt(request.getParameter("chcId"));//销售机会管理id
         salChance.setChcId(chcId);
+        //调用修改方法
         int row = salChanceService.updateSalChanceById(salChance);
         if (row==1){
             return "/Sale/SaleChance";
@@ -265,15 +282,11 @@ public class SalChanceController {
 
     /**
      * 删除销售机会管理记录
-     * @param id
+     * @param id 销售机会管理id
      */
     @RequestMapping("/delSaleChance")
     public String delBaseDict(Integer id){
         int row = salChanceService.delSalChanceById(id);
-        if(row==1){
-            return "/Sale/SaleChance";
-        }else {
-            return "删除失败";
-        }
+        return "/Sale/SaleChance";
     }
 }

@@ -55,7 +55,7 @@ public class CstLinkmanServiceImpl implements CstLinkmanService {
      */
     @Override
     public int updateLinkman(CstLinkman cstLinkman) {
-        return cstLinkmanMapper.updateByPrimaryKey(cstLinkman);
+        return cstLinkmanMapper.updateByPrimaryKeySelective(cstLinkman);
     }
 
     /**

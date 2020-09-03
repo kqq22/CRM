@@ -17,7 +17,7 @@ public class CstLostServiceImpl implements CstLostService {
     private CstLostMapper cstLostMapper;
 
     /**
-     * 查询你所有客户流失信息
+     * 查询所有客户流失信息
      * @return
      */
     @Override
@@ -46,13 +46,13 @@ public class CstLostServiceImpl implements CstLostService {
     }
 
     /**
-     * 修改客户流失信息（追加暂缓流失措施）
+     * 修改客户流失信息（追加暂缓流失措施，添加流失信息）
      * @param cstLost
      * @return
      */
     @Override
     public int updateCstLostById(CstLost cstLost) {
-        return cstLostMapper.updateByPrimaryKey(cstLost);
+        return cstLostMapper.updateByPrimaryKeySelective(cstLost);
     }
 
     /**
@@ -65,5 +65,15 @@ public class CstLostServiceImpl implements CstLostService {
         CstLostExample cstLostExample = new CstLostExample();
         cstLostExample.createCriteria().andLstStatusEqualTo(status);
         return cstLostMapper.selectByExample(cstLostExample);
+    }
+
+    /**
+     * 添加客户流失信息
+     * @param cstLost 客户流失对象
+     * @return
+     */
+    @Override
+    public int addCstLost(CstLost cstLost) {
+        return cstLostMapper.insert(cstLost);
     }
 }

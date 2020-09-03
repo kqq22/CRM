@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>客户信息管理</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/Style4.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -42,10 +42,9 @@
                     }else{
                         global($pageNum);
                     }
-
-
                 }
             );
+
             //最后一页
             $("#last").click(
                 function () {
@@ -74,7 +73,6 @@
                     nav(CstCustomerJson);
                 }
             });
-
         }
 
         /**
@@ -103,7 +101,6 @@
              * 循环读取数据，并将数据写入表格
              */
             $(CstCustomerJson.list).each(function(index,cstcustomer){
-
                 //创建一行
                 var $tr=$("<tr></tr>");
                 //创建一列
@@ -118,7 +115,8 @@
                 $custNotd.text(cstcustomer.custNo);
                 $custNametd.text(cstcustomer.custName);
                 $custRegiontd.text(cstcustomer.custRegion);
-                $custManagerNametd.text(cstcustomer.custManagerName);
+                $custManagerNametd.text(cstcustomer.custManagerName)
+                //判断客户等级
                 if(cstcustomer.custLevel==1){
                     $custLeveltd.text("战略合作伙伴");
                 }else if (cstcustomer.custLevel==2){
@@ -128,6 +126,7 @@
                 }else if (cstcustomer.custLevel==4){
                     $custLeveltd.text("普通客户");
                 }
+                //操作列
                 $cz.html("<a href='/findCstCustomerById?no="+cstcustomer.custNo+"'><img src='../images/33.gif' title='编辑' style='border:0px' /></a>" +
                     "<a href='/findCstLinkmanByNo?no="+cstcustomer.custNo+"'><img src='../images/bt_linkman.gif' title='联系人' style='border:0px;width:16px;height:16px' /></a> " +
                     "<a href='/findCstActivityAll?no="+cstcustomer.custNo+"'><img src='../images/bt_acti.gif' title='交往记录' style='border:0px' /></a> " +

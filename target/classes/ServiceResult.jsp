@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>服务反馈</title>
     <link href="../CSS/Style1.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/Style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -75,7 +75,6 @@
                     nav(CstServiceJson);
                 }
             });
-
         }
 
         /**
@@ -123,6 +122,7 @@
                 $svrCreateDatetd.text(cstservice.svrCreateDate);
                 $svrCreateBytd.text(cstservice.svrCreateBy);
                 $svrDealDatetd.text(cstservice.svrDealDate);
+                //判断服务条件是否为已处理
                 if(cstservice.svrStatus=="已处理"){
                     $cz.html("<a href='/findCstServiceByIdResult?id="+cstservice.svrId+"'><img src='../images/bt_feedback.gif' style='border:0px' /></a>");
                 }

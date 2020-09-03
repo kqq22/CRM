@@ -21,17 +21,24 @@ public class StorageController {
     @Autowired
     private StorageService storageService;
 
+    /**
+     * 分页查询+模糊查询
+     * @param pageNum 页码
+     * @param name
+     * @param warehouse
+     * @return
+     */
     @RequestMapping(value="/getStorageAll",method= RequestMethod.GET)
     @ResponseBody
     public PageInfo<Storage> getStorageAll(@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum, String name, String warehouse){
-        int pageNum1 = pageNum==null?1:pageNum;
         //必须放在list前面
-        PageHelper.startPage(pageNum1,3);
-        //调用业务类查询方法
+        PageHelper.startPage(pageNum,3);
         List<Storage> list;
         if(name==""&&warehouse==""){
+            //查询所有库存
             list = storageService.findStorageAll();
         }else {
+            //根据条件进行模糊查询
             list = storageService.findStorageByExample("%"+name+"%","%"+warehouse+"%");
         }
         PageInfo<Storage> pageInfo = new PageInfo<>(list);

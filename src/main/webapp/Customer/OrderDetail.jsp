@@ -11,7 +11,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>客户历史订单</title>
     <link href="../CSS/Style1.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/Style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -24,7 +24,7 @@
             if($("#odrStatus")==1){
                 $("#status").text("已回款");
             }else{
-                $("#status").text("已回款");
+                $("#status").text("未回款");
             }
         });
     </script>
@@ -68,7 +68,6 @@
             状态：
         </th>
         <td id="status">
-
         </td>
         <th></th><td></td>
     </tr>
@@ -93,6 +92,7 @@
         </th>
     </tr>
     <c:forEach items="${ordersLineList}" var="ordersLine" varStatus="statu">
+        <!-- 获取数据，传入到Controller类 -->
         <input id="odrDate" type="text" value="<fmt:formatDate value='${ordersLine.odrDate}' pattern='yyyy-MM-dd'/>" style="display: none;"/>
         <input id="odrAddr" type="text" value="${ordersLine.odrAddr}" style="display: none;"/>
         <input id="odrStatus" type="text" value="${ordersLine.odrStatus}" style="display: none;"/>

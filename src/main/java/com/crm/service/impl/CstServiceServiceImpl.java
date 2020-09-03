@@ -42,7 +42,6 @@ public class CstServiceServiceImpl implements CstServiceService {
      */
     @Override
     public List<CstService> findCstServiceByExample(CstService cstService) {
-        System.out.println(cstService.getSvrCustName());
         return cstServiceMapper.mySelect(cstService);
     }
 
@@ -63,7 +62,7 @@ public class CstServiceServiceImpl implements CstServiceService {
      */
     @Override
     public int udpateService(CstService cstService) {
-        return cstServiceMapper.updateByPrimaryKey(cstService);
+        return cstServiceMapper.updateByPrimaryKeySelective(cstService);
     }
 
     /**
@@ -83,7 +82,7 @@ public class CstServiceServiceImpl implements CstServiceService {
      */
     @Override
     public int updateCstServiceDetail(CstService cstService) {
-        return cstServiceMapper.updateByPrimaryKey(cstService);
+        return cstServiceMapper.updateByPrimaryKeySelective(cstService);
     }
 
     /**
@@ -93,7 +92,7 @@ public class CstServiceServiceImpl implements CstServiceService {
      */
     @Override
     public int updateCstServiceResult(CstService cstService) {
-        return cstServiceMapper.updateByPrimaryKey(cstService);
+        return cstServiceMapper.updateByPrimaryKeySelective(cstService);
     }
 
     /**

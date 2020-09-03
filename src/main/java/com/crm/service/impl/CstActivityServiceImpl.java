@@ -55,7 +55,7 @@ public class CstActivityServiceImpl implements CstActivityService {
      */
     @Override
     public int updateActivity(CstActivity cstActivity) {
-        return cstActivityMapper.updateByPrimaryKey(cstActivity);
+        return cstActivityMapper.updateByPrimaryKeySelective(cstActivity);
     }
 
     /**

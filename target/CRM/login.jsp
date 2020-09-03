@@ -26,6 +26,7 @@
     </script>
 </head>
 <body>
+    ${sessionScope.errMsg}
     <form id="form1" method="post" action="/login">
     <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>

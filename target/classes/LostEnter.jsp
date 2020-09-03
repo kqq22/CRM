@@ -10,20 +10,22 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>确认流失</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <form method="post" action="/updateCstLosts">
 <table class="tableEdit">
+    <!-- 获取数据，传到Controller类 -->
     <input name="lstId" value="${cstLost.lstId}" style="display: none;">
-    <input name="lstCustNo" value="${cstLost.lstCustNo}" style="display: none;">
-    <input name="lstCustName" value="${cstLost.lstCustName}" style="display: none;">
-    <input name="lstCustManagerId" value="${cstLost.lstCustManagerId}" style="display: none;">
-    <input name="lstCustManagerName" value="${cstLost.lstCustManagerName}" style="display: none;">
-    <input name="lstLastOrderDate" value="${cstLost.lstLastOrderDate}" style="display: none;">
-    <input name="lstDelay" value="${cstLost.lstDelay}" style="display: none;">
-    <input name="lstStatus" value="${cstLost.lstStatus}" style="display: none;">
+<%--    <input name="lstCustNo" value="${cstLost.lstCustNo}" style="display: none;">--%>
+<%--    <input name="lstCustName" value="${cstLost.lstCustName}" style="display: none;">--%>
+<%--    <input name="lstCustManagerId" value="${cstLost.lstCustManagerId}" style="display: none;">--%>
+<%--    <input name="lstCustManagerName" value="${cstLost.lstCustManagerName}" style="display: none;">--%>
+<%--    <input name="lstLastOrderDate" value="${cstLost.lstLastOrderDate}" style="display: none;">--%>
+<%--    <input name="lstDelay" value="${cstLost.lstDelay}" style="display: none;">--%>
+<%--    <input name="lstStatus" value="${cstLost.lstStatus}" style="display: none;">--%>
+
     <thead>
     <tr>
         <td colspan="4">确认流失</td>

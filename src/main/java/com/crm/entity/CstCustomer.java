@@ -1,6 +1,8 @@
 package com.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
+import java.util.Date;
 
 public class CstCustomer implements Serializable {
     private String custNo;
@@ -48,6 +50,9 @@ public class CstCustomer implements Serializable {
     private String dictItem;
 
     private Integer count;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date bmaxodrdate;
 
     private static final long serialVersionUID = 1L;
 
@@ -233,5 +238,13 @@ public class CstCustomer implements Serializable {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public Date getBmaxodrdate() {
+        return bmaxodrdate;
+    }
+
+    public void setBmaxodrdate(Date bmaxodrdate) {
+        this.bmaxodrdate = bmaxodrdate;
     }
 }

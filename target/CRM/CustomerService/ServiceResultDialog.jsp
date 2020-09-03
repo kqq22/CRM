@@ -15,6 +15,7 @@
 </head>
 <body>
 <form method="post" action="/updateCstServiceResult">
+    <!-- 获取数据，传入到Controller类 -->
     <input style='display: none;' name='svrCustName' value="${cstService.svrCustName}"/>
     <input style='display: none;' name='svrTitle' value="${cstService.svrTitle}"/>
     <input style='display: none;' name='svrType' value="${cstService.svrType}"/>

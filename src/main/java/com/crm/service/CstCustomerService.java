@@ -46,4 +46,16 @@ public interface CstCustomerService {
      * @return
      */
     public List<CstCustomer> findCstCustomerMakeReport(String contribute);
+
+    /**
+     * 查询客户状态不为2六个月没有购买行为的客户
+     * @return
+     */
+    public List<CstCustomer> findLostCustNo();
+
+    /**
+     * 修改客户信息状态
+     * @return
+     */
+    public int updateCstCustomer(CstCustomer cstCustomer);
 }

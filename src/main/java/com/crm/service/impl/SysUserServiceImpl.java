@@ -1,7 +1,9 @@
 package com.crm.service.impl;
 
+import com.crm.entity.CstCustomer;
 import com.crm.entity.SysUser;
 import com.crm.entity.SysUserExample;
+import com.crm.mapper.CstCustomerMapper;
 import com.crm.mapper.SysUserMapper;
 import com.crm.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
 
+    @Autowired
+    private CstCustomerMapper cstCustomerMapper;
+
     /**
      * 登录
      * @param username
@@ -31,7 +36,6 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUserMapper.selectByExample(sysUserExample);
     }
 
-
     /**
      * 查询所有用户
      * @return
@@ -39,5 +43,14 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public List<SysUser> findSysUser() {
         return sysUserMapper.selectByExample(null);
+    }
+
+    /**
+     * 查询将要流失的客户
+     * @return
+     */
+    @Override
+    public List<CstCustomer> findLost() {
+        return cstCustomerMapper.selectLost();
     }
 }

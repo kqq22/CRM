@@ -15,6 +15,7 @@
 </head>
 <body>
 <form method="post" action="/updateCstLost">
+    <!-- 获取数据，传入到Controller类 -->
     <input name="lstId" value="${cstLost.lstId}" style="display: none;">
     <input name="lstCustNo" value="${cstLost.lstCustNo}" style="display: none;">
     <input name="lstCustName" value="${cstLost.lstCustName}" style="display: none;">

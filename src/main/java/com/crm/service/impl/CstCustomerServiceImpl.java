@@ -51,7 +51,7 @@ public class CstCustomerServiceImpl implements CstCustomerService {
      */
     @Override
     public int updateCstCustomerByNo(CstCustomer cstCustomer) {
-        return cstCustomerMapper.updateByPrimaryKey(cstCustomer);
+        return cstCustomerMapper.updateByPrimaryKeySelective(cstCustomer);
     }
 
     /**
@@ -73,5 +73,22 @@ public class CstCustomerServiceImpl implements CstCustomerService {
         return cstCustomerMapper.selectMakeReport(contribute);
     }
 
+    /**
+     * 查询客户状态不为2六个月没有购买行为的客户
+     * @return
+     */
+    @Override
+    public List<CstCustomer> findLostCustNo() {
+        return cstCustomerMapper.selectLostCustNo();
+    }
 
+    /**
+     * 修改客户信息状态
+     * @param cstCustomer
+     * @return
+     */
+    @Override
+    public int updateCstCustomer(CstCustomer cstCustomer) {
+        return cstCustomerMapper.updateByPrimaryKeySelective(cstCustomer);
+    }
 }

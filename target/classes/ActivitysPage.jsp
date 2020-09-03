@@ -11,7 +11,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>客户交往记录</title>
     <link href="../CSS/Style1.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/Style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -20,6 +20,7 @@
             $("#CustNo").text($("#atvCustNo").val());
             $("#CusName").text($("#atvCustName").val());
         });
+        //新建
         function select() {
             var atvId = $("#atvId").val();
             location.href = "/findCstActivityByAdd?atvId="+atvId;
@@ -65,6 +66,7 @@
                 操作
             </th>
         </tr>
+        <!-- 循环开始 -->
         <c:forEach items="${cstActivityList}" var="activity" varStatus="statu">
             <input value="${activity.atvId}" id="atvId" style="display: none;"/>
             <input value="${activity.atvCustNo}" id="atvCustNo" style="display: none;"/>
@@ -80,6 +82,7 @@
             </td>
         </tr>
         </c:forEach>
+        <!-- 循环结束 -->
     </table>
 </div>
 </body>

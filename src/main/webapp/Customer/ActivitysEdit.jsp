@@ -11,7 +11,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>编辑客户来往记录</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,7 +25,6 @@
         <td colspan="4">编辑客户来往记录</td>
     </tr>
     </thead>
-    atvDate
     <tr>
         <th>交往时间：</th>
         <td>

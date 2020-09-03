@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>客户历史订单</title>
     <link href="../CSS/Style1.css" rel="stylesheet" type="text/css" />
     <link href="../CSS/Style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
@@ -69,7 +69,6 @@
                     nav(OrdersJson);
                 }
             });
-
         }
 
         /**
@@ -111,6 +110,7 @@
                 $odrIdtd.text(orders.odrId);
                 $odrDatetd.text(orders.odrDate);
                 $odrAddrtd.text(orders.odrAddr);
+                //判断是否已回款
                 if(orders.odrStatus==1){
                     $odrStatustd.text("已回款");
                 }else {

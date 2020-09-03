@@ -7,24 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date"/>
 <html>
 <head>
     <title>Title</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            //显示当前时间
-            var date = new Date();
-            this.year = date.getFullYear();
-            this.month = date.getMonth() + 1;
-            this.date = date.getDate();
-            this.month = this.month < 10 ? ('0' + this.month) : this.month;
-            this.date = this.date < 10 ? ('0' + this.date) : this.date;
-            var currentTime =  this.year + "-" + this.month + "-" + this.date;
-            $("#nowdate").val(currentTime);
-        });
-    </script>
 </head>
 <body>
 <form method="post" action="/updateSaleChance">
@@ -69,7 +57,7 @@
         <th>创建人</th>
         <td><input type="text" readonly="readonly" value="${sessionScope.uname}" /></td>
         <th>创建时间</th>
-        <td><input type="text" id="nowdate" readonly="readonly"/></td>
+        <td><input type="text" readonly="readonly" value="<fmt:formatDate value='${now}' pattern='yyyy-MM-dd'/>"/></td>
     </tr>
     <tfoot>
     <tr>

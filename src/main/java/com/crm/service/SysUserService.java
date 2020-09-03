@@ -1,5 +1,6 @@
 package com.crm.service;
 
+import com.crm.entity.CstCustomer;
 import com.crm.entity.SysUser;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface SysUserService {
      * @return
      */
     public List<SysUser> findSysUser();
+
+    public List<CstCustomer> findLost();
 }

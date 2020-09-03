@@ -8,12 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>创建服务</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         function showCustomer(){
             var returnValue = window.showModalDialog("../publicPage/SelectCustomer.htm?data=" + Math.random(), "参数", "dialogWidth:400px;dialogHeight:220px;help:no");
-
         }
     </script>
 </head>
