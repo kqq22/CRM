@@ -3,7 +3,7 @@
     String path = request.getContextPath();
     String basePath =   request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/page/";
 %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <title>CRM客户关系管理系统</title>
     <link href="CSS/left.css" rel="stylesheet" type="text/css" />
