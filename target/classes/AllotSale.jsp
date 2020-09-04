@@ -58,18 +58,15 @@
     <tr>
         <th>指派人：</th>
         <td>
-            <c:forEach items="${sysUserList}" var="sysuser" varStatus="statu">
-                <input style="display: none" name="userid" value="${sysuser.userId}"/>
-            </c:forEach>
-            <select name="userName">
+            <select name="userId">
                 <c:forEach items="${sysUserList}" var="sysuser" varStatus="statu">
-                    <option>${sysuser.userName}</option>
+                    <option value="${sysuser.userId}">${sysuser.userName}</option>
                 </c:forEach>
             </select>
 
         </td>
         <th>指派时间：</th>
-        <td id="currentTime"><fmt:formatDate value='${now}' pattern='yyyy-MM-dd'/></td>
+        <td><fmt:formatDate value='${now}' pattern='yyyy-MM-dd'/></td>
     </tr>
     <tfoot>
     <tr>

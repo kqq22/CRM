@@ -150,7 +150,6 @@
 </table>
 <div id="dataDiv">
     <div id="headDiv">
-        <img src="../images/22.gif" />&nbsp;&nbsp;<a href="ActivitysAdd.html">新建</a>
     </div>
     <table class="dataTable" id="dataTable">
         <tr>

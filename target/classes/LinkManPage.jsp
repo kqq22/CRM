@@ -96,6 +96,7 @@
         </tr>
         </c:forEach>
     </table>
+    <a href="/Customer/CustomerPage.jsp"><button>返回</button></a>
 </div>
 </body>
 </html>

@@ -84,6 +84,7 @@
         </c:forEach>
         <!-- 循环结束 -->
     </table>
+    <a href="/Customer/CustomerPage.jsp"><button>返回</button></a>
 </div>
 </body>
 </html>

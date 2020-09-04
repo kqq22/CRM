@@ -10,7 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>服务信息</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -78,7 +78,7 @@
     <tr>
         <td colspan="4">
             <input type="submit" value="确定" />&nbsp;&nbsp;
-            <input type="button" value="返回"  />
+            <a href="/CustomerService/ServiceDispose.jsp"><input type="button" value="返回"  /></a>
         </td>
     </tr>
     </tfoot>

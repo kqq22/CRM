@@ -82,5 +82,6 @@
     </tr>
 </c:forEach>
 </table>
+<a href="/Sale/SaleManager.jsp"><button type="button">返回</button></a>
 </body>
 </html>
