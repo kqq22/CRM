@@ -140,9 +140,14 @@ public class CstServiceController {
     public void updateCstService(CstService cstService,HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String createDate = request.getParameter("createDate");
+        int DuetoId = Integer.parseInt(request.getParameter("DuetoId"));
+        //查询选中的分配者
+        SysUser user = sysUserService.findSysUserById(DuetoId);
         cstService.setSvrCreateDate(sdf.parse(createDate));
         cstService.setSvrStatus("已分配");
         cstService.setSvrDueDate(new Date());
+        cstService.setSvrDueId(DuetoId);
+        cstService.setSvrDueTo(user.getUserName());
         int row = cstServiceService.udpateService(cstService);
         response.sendRedirect("/findUser");
     }

@@ -23,5 +23,16 @@ public interface SysUserService {
      */
     public List<SysUser> findSysUser();
 
+    /**
+     * 查询流失客户
+     * @return
+     */
     public List<CstCustomer> findLost();
+
+    /**
+     * 根据id查询用户
+     * @param id
+     * @return
+     */
+    public SysUser findSysUserById(int id);
 }

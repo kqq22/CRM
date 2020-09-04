@@ -3,6 +3,7 @@
     String path = request.getContextPath();
     String basePath =   request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/page/";
 %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <title>CRM客户关系管理系统</title>
     <style type="text/css">
@@ -26,7 +27,6 @@
     </script>
 </head>
 <body>
-    ${sessionScope.errMsg}
     <form id="form1" method="post" action="/login">
     <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
@@ -74,7 +74,7 @@
                                                 </td>
                                                 <td height="25">
                                                     <div align="left">
-                                                        <input type="submit" style="background-image:url(images/dl.gif);border:none;width:49px;height:18px" value=""/>
+                                                        <input type="submit"style="background-image:url(images/dl.gif);border:none;width:49px;height:18px" value=""/>
                                                     </div>
                                                 </td>
                                             </tr>

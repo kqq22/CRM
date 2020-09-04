@@ -53,4 +53,14 @@ public class SysUserServiceImpl implements SysUserService {
     public List<CstCustomer> findLost() {
         return cstCustomerMapper.selectLost();
     }
+
+    /**
+     * 根据id查询用户
+     * @param id
+     * @return
+     */
+    @Override
+    public SysUser findSysUserById(int id) {
+        return sysUserMapper.selectByPrimaryKey(id);
+    }
 }

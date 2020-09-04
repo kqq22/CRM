@@ -132,7 +132,7 @@
                         "<input style='display: none;' name='svrId' value='"+cstservice.svrId+"'/>" +
                         "<input style='display: none;' name='svrRequest' value='"+cstservice.svrRequest+"'/>" +
                         "<input style='display: none;' name='svrCreateId' value='"+cstservice.svrCreateId+"'/>"+
-                        "<input style='display: none;' name='svrCreateBy' value='"+cstservice.svrCreateBy+"'/><c:forEach items='${userList}' var='user' varStatus='statu'><input style='display: none;' name='svrDueId' value='${user.userId}'/></c:forEach><select name='svrDueTo'><c:forEach items='${userList}' var='user' varStatus='status'><option value='${user.userName}'>${user.userName}</option></c:forEach></select><input type='submit' value='确定' />");
+                        "<input style='display: none;' name='svrCreateBy' value='"+cstservice.svrCreateBy+"'/><select name='DuetoId'><c:forEach items='${userList}' var='user' varStatus='status'><option value='${user.userId}'>${user.userName}</option></c:forEach></select><input type='submit' value='确定' />");
                 }else{
                     $svrStatustd.text(cstservice.svrStatus);
                 }

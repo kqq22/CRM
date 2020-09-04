@@ -70,10 +70,11 @@ public class SysUserController {
                     int row = cstLostService.addCstLost(cstLost);
                 }
             }
+            session.setAttribute("Msg", "登录成功");
             return "/Main";
         }else{
             //登录失败
-            session.setAttribute("errMsg", "用户名或密码错误");
+            session.setAttribute("Msg", "用户名或密码错误");
             return "redirect:/login.jsp";
         }
     }

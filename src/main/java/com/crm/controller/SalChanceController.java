@@ -129,13 +129,10 @@ public class SalChanceController {
      * @throws IOException
      */
     @RequestMapping("/addSalChance")
-    public String addSalChance(SalChance salChance, HttpServletRequest request, String createdate) throws ParseException {
+    public String addSalChance(SalChance salChance, HttpServletRequest request ){
         HttpSession session = request.getSession();
-        //日期处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date cdate = sdf.parse(createdate);//创建时间
         int id = Integer.parseInt(session.getAttribute("uid").toString());//当前用户id
-        salChance.setChcCreateDate(cdate);
+        salChance.setChcCreateDate(new Date());
         salChance.setChcCreateId(id);
         //调用添加方法
         int row = salChanceService.addSalChance(salChance);
@@ -228,25 +225,24 @@ public class SalChanceController {
      * @param salChance
      */
     @RequestMapping("/updateSaleChanceDueTo")
-    public String updateSaleChanceDueTo(SalChance salChance,HttpServletRequest request) throws ParseException {
+    public String updateSaleChanceDueTo(SalChance salChance,HttpServletRequest request){
         //获取参数
-        String currentTime = request.getParameter("cTime");
+        int userId = Integer.parseInt(request.getParameter("userId"));
         int chcId = Integer.parseInt(request.getParameter("chcId"));
-        int userid = Integer.parseInt(request.getParameter("userid"));
-        String username = request.getParameter("userName");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //获取选中的分配者
+        SysUser user = sysUserService.findSysUserById(userId);
         //设置参数
         salChance.setChcId(chcId);
-        salChance.setChcDueDate(sdf.parse(currentTime));
-        salChance.setChcDueId(userid);
-        salChance.setChcDueTo(username);
+        salChance.setChcDueDate(new Date());
+        salChance.setChcDueId(userId);
+        salChance.setChcDueTo(user.getUserName());
         salChance.setChcStatus(2);
         //调用修改方法
         int row = salChanceService.updateSalChanceById(salChance);
         if (row==1){
-            return "/Sale/SaleChance";
+           return "/Sale/SaleChance";
         }else {
-            return "/Sale/AllotSale";
+           return "/Sale/AllotSale";
         }
     }
 
