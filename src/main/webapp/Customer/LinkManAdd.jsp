@@ -13,8 +13,8 @@
 </head>
 <body>
 <form method="post" action="/addCstLinkman">
-    <input name="lkmCustNo" value="${linkman.lkmCustNo}" style="display: none;" />
-    <input name="lkmCustName" value="${linkman.lkmCustName} " style="display: none;" />
+    <input name="lkmCustNo" value="${cstCustomer.custNo}" style="display: none;"/>
+    <input name="lkmCustName" value="${cstCustomer.custName} " style="display: none;" />
 <table class="tableEdit">
     <thead>
     <tr>
@@ -51,7 +51,7 @@
     <tr>
         <td colspan="4">
             <input type="submit" value="确定" />&nbsp;&nbsp;
-            <a href="/findCstLinkmanByNo?no=${cstLinkman.lkmCustNo}"><input type="button" value="返回"  /></a>
+            <a href="/findCstLinkmanByNo?no=${cstCustomer.custNo}&name=${cstCustomer.custName}"><input type="button" value="返回"  /></a>
         </td>
     </tr>
     </tfoot>

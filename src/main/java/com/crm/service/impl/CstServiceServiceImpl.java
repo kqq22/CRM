@@ -92,6 +92,7 @@ public class CstServiceServiceImpl implements CstServiceService {
      */
     @Override
     public int updateCstServiceResult(CstService cstService) {
+        System.out.println("result"+cstService.getSvrDealBy());
         return cstServiceMapper.updateByPrimaryKeySelective(cstService);
     }
 

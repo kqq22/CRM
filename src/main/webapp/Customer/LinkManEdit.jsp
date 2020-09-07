@@ -53,7 +53,7 @@
     <tr>
         <td colspan="4">
             <input type="submit" value="确定" />&nbsp;&nbsp;
-            <a href="/findCstLinkmanByNo?no=${cstLinkman.lkmCustNo}"><input type="button" value="返回"  /></a>
+            <a href="/findCstLinkmanByNo?no=${cstLinkman.lkmCustNo}&name=${cstLinkman.lkmCustName}"><input type="button" value="返回"  /></a>
         </td>
     </tr>
     </tfoot>

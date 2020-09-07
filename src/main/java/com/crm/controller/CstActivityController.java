@@ -1,7 +1,9 @@
 package com.crm.controller;
 
 import com.crm.entity.CstActivity;
+import com.crm.entity.CstCustomer;
 import com.crm.service.CstActivityService;
+import com.crm.service.CstCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,9 @@ public class CstActivityController {
     @Autowired
     private CstActivityService cstActivityService;
 
+    @Autowired
+    private CstCustomerService cstCustomerService;
+
     /**
      * 根据客户编号查询客户交往记录
      * @param m
@@ -29,9 +34,11 @@ public class CstActivityController {
      * @return
      */
     @RequestMapping("/findCstActivityAll")
-    public String findCstActivityAll(Model m, String no){
+    public String findCstActivityAll(Model m, String no,String name){
         List<CstActivity> cstActivityList = cstActivityService.findCstActivityAll(no);
         m.addAttribute("cstActivityList",cstActivityList);
+        m.addAttribute("no",no);
+        m.addAttribute("name",name);
         return "Customer/ActivitysPage";
     }
 
@@ -50,14 +57,14 @@ public class CstActivityController {
 
     /**
      * 根据id查询客户交往记录（跳转新建客户来往记录）
-     * @param atvId 活动id
+     * @param no 活动no
      * @param m
      * @return
      */
     @RequestMapping("/findCstActivityByAdd")
-    public String findCstActivityByAdd(Integer atvId, Model m){
-        CstActivity cstActivity = cstActivityService.findCstActivityById(atvId);
-        m.addAttribute("cstActivity",cstActivity);
+    public String findCstActivityByAdd(String no, Model m){
+        CstCustomer cstCustomer = cstCustomerService.findCstCustomerByNo(no);
+        m.addAttribute("cstCustomer",cstCustomer);
         return "Customer/ActivitysAdd";
     }
 
@@ -77,7 +84,7 @@ public class CstActivityController {
         cstActivity.setAtvDate(sdf.parse(atvDate));
         //调用添加方法
         int row = cstActivityService.addActivity(cstActivity);
-        request.getRequestDispatcher("/findCstActivityAll?no="+cstActivity.getAtvCustNo()).forward(request,response);
+        request.getRequestDispatcher("/findCstActivityAll?no="+cstActivity.getAtvCustNo()+"&name="+cstActivity.getAtvCustName()).forward(request,response);
     }
 
     /**
@@ -92,7 +99,7 @@ public class CstActivityController {
         cstActivity.setAtvDate(sdf.parse(atvDate));
         //调用修改方法
         int row = cstActivityService.updateActivity(cstActivity);
-        request.getRequestDispatcher("/findCstActivityAll?no="+cstActivity.getAtvCustNo()).forward(request,response);
+        request.getRequestDispatcher("/findCstActivityAll?no="+cstActivity.getAtvCustNo()+"&name="+cstActivity.getAtvCustName()).forward(request,response);
     }
 
     /**

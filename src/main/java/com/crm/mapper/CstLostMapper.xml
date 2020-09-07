@@ -101,7 +101,7 @@
       where lst_cust_name like '%${lstCustName}%'
       and lst_cust_manager_name like '%${lstCustManagerName}%'
       <if test="lstStatus!=null">
-        and lst_status = ${lstStatus}
+        and lst_status = '${lstStatus}'
       </if>
   </select>
 

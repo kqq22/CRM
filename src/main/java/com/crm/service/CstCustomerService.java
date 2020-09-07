@@ -28,6 +28,13 @@ public interface CstCustomerService {
     public CstCustomer findCstCustomerByNo(String no);
 
     /**
+     * 添加客户
+     * @param cstCustomer
+     * @return
+     */
+    public int addCstCustomer(CstCustomer cstCustomer);
+
+    /**
      * 修改客户信息
      * @param cstCustomer
      * @return

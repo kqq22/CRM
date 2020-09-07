@@ -45,6 +45,16 @@ public class CstCustomerServiceImpl implements CstCustomerService {
     }
 
     /**
+     * 添加客户
+     * @param cstCustomer
+     * @return
+     */
+    @Override
+    public int addCstCustomer(CstCustomer cstCustomer) {
+        return cstCustomerMapper.insertSelective(cstCustomer);
+    }
+
+    /**
      * 修改客户信息
      * @param cstCustomer
      * @return

@@ -1,4 +1,8 @@
-package com.crm.controller;import com.crm.entity.CstLinkman;
+package com.crm.controller;
+
+import com.crm.entity.CstCustomer;
+import com.crm.entity.CstLinkman;
+import com.crm.service.CstCustomerService;
 import com.crm.service.CstLinkmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,17 +22,20 @@ public class CstLinkmanController {
     @Autowired
     private CstLinkmanService cstLinkmanService;
 
+    @Autowired
+    private CstCustomerService cstCustomerService;
     /**
      * 根据客户信息管理编号查询联系人
      * @param m
      * @return
      */
     @RequestMapping("/findCstLinkmanByNo")
-    public String findCstLinkmanByNo(Model m, HttpServletRequest request){
-        String no = request.getParameter("no");//编号
+    public String findCstLinkmanByNo(Model m,String no,String name){
         //调用查询方法
         List<CstLinkman> linkmanList = cstLinkmanService.findCstLinkmanByNo(no);
         m.addAttribute("linkmanList",linkmanList);
+        m.addAttribute("no",no);
+        m.addAttribute("name",name);
         return "Customer/LinkManPage";
     }
 
@@ -47,14 +54,14 @@ public class CstLinkmanController {
 
     /**
      * 根据id查询联系人（跳转到新建联系人页面）
-     * @param lkmId 联系人id
+     * @param no 联系人no
      * @param m
      * @return
      */
     @RequestMapping("/findCstLinkmanBylkmId")
-    public String findCstLinkmanAdd(Integer lkmId, Model m){
-        CstLinkman linkman = cstLinkmanService.findCstLinkmanById(lkmId);
-        m.addAttribute("linkman",linkman);
+    public String findCstLinkmanAdd(String no, Model m){
+        CstCustomer cstCustomer = cstCustomerService.findCstCustomerByNo(no);
+        m.addAttribute("cstCustomer",cstCustomer);
         return "Customer/LinkManAdd";
     }
 
@@ -66,7 +73,7 @@ public class CstLinkmanController {
     @RequestMapping("/addCstLinkman")
     public void addCstLinkman(CstLinkman cstLinkman, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int row = cstLinkmanService.addCstLinkman(cstLinkman);
-        request.getRequestDispatcher("/findCstLinkmanByNo?no="+cstLinkman.getLkmCustNo()).forward(request,response);
+        request.getRequestDispatcher("/findCstLinkmanByNo?no="+cstLinkman.getLkmCustNo()+"&name="+cstLinkman.getLkmCustName()).forward(request,response);
     }
 
     /**
@@ -80,7 +87,7 @@ public class CstLinkmanController {
         String no = cstLinkman.getLkmCustNo();//编号
         //存放，用于页面显示
         request.setAttribute("no",no);
-        request.getRequestDispatcher("/findCstLinkmanByNo?no="+no).forward(request,response);
+        request.getRequestDispatcher("/findCstLinkmanByNo?no="+no+"&name="+cstLinkman.getLkmCustName()).forward(request,response);
     }
 
     /**

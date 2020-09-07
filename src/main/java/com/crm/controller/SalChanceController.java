@@ -1,7 +1,9 @@
 package com.crm.controller;
+import com.crm.entity.CstCustomer;
 import com.crm.entity.SalChance;
 import com.crm.entity.SalPlan;
 import com.crm.entity.SysUser;
+import com.crm.service.CstCustomerService;
 import com.crm.service.SalChanceService;
 import com.crm.service.SalPlanService;
 import com.crm.service.SysUserService;
@@ -39,6 +41,9 @@ public class SalChanceController {
     //注入客户开发计划业务逻辑接口
     @Autowired
     private SalPlanService salPlanService;
+
+    @Autowired
+    private CstCustomerService cstCustomerService;
 
     /**
      * SalChance 销售机会管理
@@ -253,6 +258,27 @@ public class SalChanceController {
      */
     @RequestMapping("/updateSaleChanceStatus")
     public String updateSaleChanceStatus(SalChance salChance){
+        SalChance salChance1 = salChanceService.findSalChanceById(salChance.getChcId());
+        CstCustomer cstCustomer = new CstCustomer();
+        //随机数
+        int[] num = new int[6];
+        String s = "";
+        for(int i = 0;i<num.length;i++){
+            num[i] = (int)(Math.random()*10);
+            if(i == 0){
+                s =String.valueOf(num[i]);
+            }else{
+                s += String.valueOf(num[i]);
+            }
+        }
+        cstCustomer.setCustNo("KH"+s);
+        cstCustomer.setCustName(salChance1.getChcCustName());
+        cstCustomer.setCustManagerId(salChance1.getChcDueId());
+        cstCustomer.setCustManagerName(salChance1.getChcDueTo());
+        cstCustomer.setCustStatus("1");
+        //调用添加客户的犯法
+        int row1= cstCustomerService.addCstCustomer(cstCustomer);
+        //修改客户开发状态（修改为开发成功）
         int row = salChanceService.updateSalChanceById(salChance);
         return "/Sale/SaleManager";
     }

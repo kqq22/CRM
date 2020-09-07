@@ -16,10 +16,6 @@
     <link href="../CSS/Style2.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $("#CustNo").text($("#atvCustNo").val());
-            $("#CusName").text($("#atvCustName").val());
-        });
         //新建
         function select() {
             var atvId = $("#atvId").val();
@@ -37,16 +33,16 @@
         <th>
             客户编号：
         </th>
-        <td id="CustNo"></td>
+        <td>${no}</td>
         <th>
             客户名称：
         </th>
-        <td id="CusName"></td>
+        <td>${name}</td>
     </tr>
 </table>
 <div id="dataDiv">
     <div id="headDiv">
-        <img src="../images/22.gif" />&nbsp;&nbsp;<a href="#" onclick="select()">新建</a>
+        <img src="../images/22.gif" />&nbsp;&nbsp;<a href="/findCstActivityByAdd?no=${no}">新建</a>
     </div>
     <table class="dataTable">
         <tr>

@@ -33,7 +33,7 @@ public class RootConfig {
     public DataSource dataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/crm?serverTimezone=UTC");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/crm");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         dataSource.setInitialSize(5);

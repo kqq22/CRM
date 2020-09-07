@@ -43,7 +43,8 @@ public class CstServiceController {
         HttpSession session = request.getSession();
         int uid = Integer.parseInt(session.getAttribute("uid").toString());
         String uname = session.getAttribute("uname").toString();
-        cstService.setSvrCreateDate(new Date());
+        Date date = new Date();
+        cstService.setSvrCreateDate(date);
         cstService.setSvrCreateId(uid);
         cstService.setSvrCreateBy(uname);
         cstService.setSvrStatus("新创建");
@@ -145,7 +146,8 @@ public class CstServiceController {
         SysUser user = sysUserService.findSysUserById(DuetoId);
         cstService.setSvrCreateDate(sdf.parse(createDate));
         cstService.setSvrStatus("已分配");
-        cstService.setSvrDueDate(new Date());
+        Date date = new Date();
+        cstService.setSvrDueDate(date);
         cstService.setSvrDueId(DuetoId);
         cstService.setSvrDueTo(user.getUserName());
         int row = cstServiceService.udpateService(cstService);
@@ -209,13 +211,18 @@ public class CstServiceController {
      */
     @RequestMapping("/updateCstServiceDetail")
     public void updateCstServiceDetail(CstService cstService,HttpServletRequest request,HttpServletResponse response) throws IOException, ParseException {
+        HttpSession session = request.getSession();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String createDate = request.getParameter("createDate");
         String DueDate = request.getParameter("DueDate");
         cstService.setSvrCreateDate(sdf.parse(createDate));
         cstService.setSvrDueDate(sdf.parse(DueDate));
         cstService.setSvrStatus("已处理");
-        cstService.setSvrDealDate(new Date());
+        Date date = new Date();
+        cstService.setSvrDealDate(date);
+        SysUser user = (SysUser) session.getAttribute("user");
+        cstService.setSvrDealId(user.getUserId());
+        cstService.setSvrDealBy(user.getUserName());
         int row = cstServiceService.updateCstServiceDetail(cstService);
         response.sendRedirect("/findUser");
     }
@@ -234,7 +241,7 @@ public class CstServiceController {
         cstService.setSvrDueDate(sdf.parse(DueDate));
         cstService.setSvrDealDate(sdf.parse(DealDate));
         cstService.setSvrStatus("已反馈");
-        int row = cstServiceService.updateCstServiceDetail(cstService);
+        int row = cstServiceService.updateCstServiceResult(cstService);
         response.sendRedirect("/findUserResult");
     }
 
