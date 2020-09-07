@@ -128,8 +128,8 @@
                 }
                 //操作列
                 $cz.html("<a href='/findCstCustomerById?no="+cstcustomer.custNo+"'><img src='../images/33.gif' title='编辑' style='border:0px' /></a>" +
-                    "<a href='/findCstLinkmanByNo?no="+cstcustomer.custNo+"'><img src='../images/bt_linkman.gif' title='联系人' style='border:0px;width:16px;height:16px' /></a> " +
-                    "<a href='/findCstActivityAll?no="+cstcustomer.custNo+"'><img src='../images/bt_acti.gif' title='交往记录' style='border:0px' /></a> " +
+                    "<a href='/findCstLinkmanByNo?no="+cstcustomer.custNo+"&name="+cstcustomer.custName+"'><img src='../images/bt_linkman.gif' title='联系人' style='border:0px;width:16px;height:16px' /></a> " +
+                    "<a href='/findCstActivityAll?no="+cstcustomer.custNo+"&name="+cstcustomer.custName+"'><img src='../images/bt_acti.gif' title='交往记录' style='border:0px' /></a> " +
                     "<a href='/findOrdersAlls?cName="+cstcustomer.custName+"&cNo="+cstcustomer.custNo+"'><img src='../images/bt_orders.gif' title='历史订单' style='border:0px' /></a> " +
                     "<a href='/delCstCustomer?no="+cstcustomer.custNo+"'><img src='../images/bt_del.gif' title='删除' style='border:0px' /></a>");
                 //把列添加到行

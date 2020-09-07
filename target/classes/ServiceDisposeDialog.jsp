@@ -14,21 +14,7 @@
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<form method="post" action="/updateCstServiceDetail">
-    <!-- 获取参数 -->
-    <input style='display: none;' name='svrCustName' value="${cstService.svrCustName}"/>
-    <input style='display: none;' name='svrTitle' value="${cstService.svrTitle}"/>
-    <input style='display: none;' name='svrType' value="${cstService.svrType}"/>
-    <input style='display: none;' name='createDate' value="<fmt:formatDate value="${cstService.svrCreateDate}" pattern="yyyy-MM-dd"/>"/>
-    <input style='display: none;' name='svrId' value="${cstService.svrId}"/>
-    <input style='display: none;' name='svrRequest' value="${cstService.svrRequest}"/>
-    <input style='display: none;' name='svrCreateId' value="${cstService.svrCreateId} "/>
-    <input style='display: none;' name='svrCreateBy' value="${cstService.svrCreateBy}"/>
-    <input style='display: none;' name='svrDueId' value="${cstService.svrDueId}"/>
-    <input style='display: none;' name='svrDueTo' value="${cstService.svrDueTo}"/>
-    <input style='display: none;' name='DueDate' value="<fmt:formatDate value="${cstService.svrDueDate}" pattern="yyyy-MM-dd"/>"/>
-    <input style='display: none;' name='svrDealId' value="${sessionScope.uid}"/>
-    <input style='display: none;' name='svrDealBy' value="${sessionScope.uname}"/>
+
 <table class="tableEdit" style="width:500px;">
     <thead>
     <tr>
@@ -62,6 +48,19 @@
         <td><fmt:formatDate value="${cstService.svrDueDate}" pattern="yyyy-MM-dd"/></td>
     </tr>
 </table>
+<form method="post" action="/updateCstServiceDetail">
+    <!-- 获取参数 -->
+    <input style='display: none;' name='svrCustName' value="${cstService.svrCustName}"/>
+    <input style='display: none;' name='svrTitle' value="${cstService.svrTitle}"/>
+    <input style='display: none;' name='svrType' value="${cstService.svrType}"/>
+    <input style='display: none;' name='createDate' value="<fmt:formatDate value="${cstService.svrCreateDate}" pattern="yyyy-MM-dd"/>"/>
+    <input style='display: none;' name='svrId' value="${cstService.svrId}"/>
+    <input style='display: none;' name='svrRequest' value="${cstService.svrRequest}"/>
+    <input style='display: none;' name='svrCreateId' value="${cstService.svrCreateId} "/>
+    <input style='display: none;' name='svrCreateBy' value="${cstService.svrCreateBy}"/>
+    <input style='display: none;' name='svrDueId' value="${cstService.svrDueId}"/>
+    <input style='display: none;' name='svrDueTo' value="${cstService.svrDueTo}"/>
+    <input style='display: none;' name='DueDate' value="<fmt:formatDate value="${cstService.svrDueDate}" pattern="yyyy-MM-dd"/>"/>
 <table class="tableEdit" style="width:500px;">
     <thead>
     <tr>

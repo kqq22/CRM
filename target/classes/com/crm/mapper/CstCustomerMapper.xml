@@ -107,7 +107,7 @@
 
    <select id="mySelectByExample" parameterType="com.crm.entity.CstCustomerExample" resultMap="BaseResultMap">
       select * from cst_customer
-      where cust_no like
+      where cust_no like '%${custNo}%'
       and cust_name like '%${custName}%'
       and cust_region like '%${custRegion}%'
       and cust_manager_name like '%${custManagerName}%'
@@ -117,7 +117,20 @@
     </select>
 
     <select id="selectMakeReport" parameterType="com.crm.entity.CstCustomerExample" resultMap="BaseResultMap">
-        select b.dict_item as dict_item,count(*) as count from cst_customer c,base_dict b
+        select
+         <if test="contribute=='客户等级'">
+            b.dict_item as dict_item
+         </if>
+         <if test="contribute=='信用度'">
+            c.cust_credit as cust_credit
+         </if>
+         <if test="contribute=='满意度'">
+            c.cust_satisfy as cust_satisfy
+         </if>
+         <if test="contribute==null">
+            b.dict_item as dict_item
+         </if>
+         ,count(*) as count from cst_customer c,base_dict b
         where c.cust_level = b.dict_id
         <if test="contribute=='客户等级'">
             group by b.dict_item
@@ -127,6 +140,9 @@
         </if>
         <if test="contribute=='满意度'">
             group by cust_satisfy
+        </if>
+        <if test="contribute==null">
+            group by b.dict_item
         </if>
         order by count(*)
     </select>

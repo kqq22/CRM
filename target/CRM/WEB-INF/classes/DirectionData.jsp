@@ -65,7 +65,10 @@
                     <td>${basedict.dictType}</td>
                     <td>${basedict.dictItem}</td>
                     <td>${basedict.dictValue}</td>
-                    <td>${basedict.dictIsEditable }</td>
+                    <td>
+                        <c:if test="${basedict.dictIsEditable==0}">否</c:if>
+                        <c:if test="${basedict.dictIsEditable==1}">是</c:if>
+                    </td>
                     <c:if test="${basedict.dictIsEditable==1}">
                         <td>
                             <a href="/findBaseDictById?id=${basedict.dictId}"><img src="../images/33.gif" title="编辑" style="border:0px" /></a>

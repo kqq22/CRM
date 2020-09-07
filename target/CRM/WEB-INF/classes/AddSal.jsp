@@ -13,9 +13,50 @@
 <head>
     <title>Title</title>
     <link href="../CSS/style2.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/JS/jquery-3.5.1.js"></script>
+    <script type="text/javascript">
+        function check() {
+            if($("#custName").val()!=""&&$("#rate").val()!=""&&$("#title").val()!=""&&$("#desc").val()!=""){
+                return true;
+            }else{
+                return false;
+            }
+        }
+            function checkBlur() {
+                if($("#custName").val()!=""&&$("#rate").val()!=""&&$("#title").val()!=""&&$("#desc").val()!=""){
+                    return true;
+                }else{
+                    if($("#custName").val()==""){
+                        $("#checkName").text("客户名称不能为空!");
+                    }else{
+                        $("#checkName").text("");
+                    }
+
+                    if($("#rate").val()==""){
+                        $("#rate").append("客户名称不能为空!");
+                    }else{
+                        $("#checkName").text("");
+                    }
+
+                    if($("#title").val()==""){
+                        $("#title").append("客户名称不能为空!");
+                    }else{
+                        $("#checkName").text("");
+                    }
+
+                    if($("#desc").val()==""){
+                        $("#desc").append("客户名称不能为空!");
+                    }else{
+                        $("#checkName").text("");
+                    }
+                    return false;
+                }
+        }
+    </script>
 </head>
 <body>
 <form method="post" action="/addSalChance">
+<%--    --%>
 <table class="tableEdit">
     <thead>
     <tr>
@@ -25,7 +66,7 @@
     <tr>
         <th>客户名称：</th>
         <td>
-            <input type="text" name="chcCustName"/>
+            <input type="text" name="chcCustName" id="custName"/><span id="checkName" style="color: red"></span>
         </td>
         <th>机会来源</th>
         <td><input type="text" name="chcSource"/></td>
@@ -33,7 +74,7 @@
     <tr>
         <th>成功几率：</th>
         <td>
-            <input type="text" name="chcRate"/>
+            <input type="text" name="chcRate" id="rate"/><span id="checkRate" style="color: red"></span>
         </td>
         <th></th>
         <td></td>
@@ -46,11 +87,11 @@
     </tr>
     <tr>
         <th>概要：</th>
-        <td colspan="3"><input type="text" style="width:500px" name="chcTitle"/></td>
+        <td colspan="3"><input type="text" style="width:500px" name="chcTitle" id="title"/><span id="checkTitle" style="color: red"></span></td>
     </tr>
     <tr>
         <th>机会描述：</th>
-        <td colspan="3"><textarea style="width:500px" name="chcDesc"></textarea></td>
+        <td colspan="3"><textarea style="width:500px" name="chcDesc" id="desc"></textarea><span id="checkDesc" style="color: red"></span></td>
     </tr>
     <tr>
         <th>创建人</th>
@@ -62,7 +103,7 @@
     <tfoot>
     <tr>
         <td colspan="4">
-            <input type="submit" value="确定并返回" />&nbsp;&nbsp;
+            <input type="submit" value="确定并返回" onclick="return check()"/>&nbsp;&nbsp;
             <a href="/Sale/SaleChance.jsp"><input type="button" value="返回" /></a>
         </td>
     </tr>

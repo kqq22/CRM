@@ -31,8 +31,6 @@
     <input style='display: none;' name='svrDealBy' value="${sessionScope.uname}"/>
     <input style='display: none;' name='DealDate' value="<fmt:formatDate value="${cstService.svrDealDate}" pattern="yyyy-MM-dd"/>"/>
     <input style='display: none;' name='svrDeal' value="${cstService.svrDeal}"/>
-    <input style='display: none;' name='svrDealId' value="${cstService.svrDealId}"/>
-    <input style='display: none;' name='svrDealBy' value="${cstService.svrDealBy}"/>
 <table class="tableEdit" style="width:500px;">
     <thead>
     <tr>

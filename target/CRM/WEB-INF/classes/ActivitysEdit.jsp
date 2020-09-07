@@ -48,7 +48,7 @@
     <tr>
         <td colspan="4">
             <input type="submit" value="确定" />&nbsp;&nbsp;
-            <a href="/findCstActivityAll?no=${cstActivity.atvCustNo}"><input type="button" value="返回" /></a>
+            <a href="/findCstActivityAll?no=${cstActivity.atvCustNo}&name=${cstActivity.atvCustName}"><input type="button" value="返回" /></a>
         </td>
     </tr>
     </tfoot>

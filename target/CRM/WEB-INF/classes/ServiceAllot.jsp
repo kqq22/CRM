@@ -180,7 +180,7 @@
         <td>
             <select id="Type">
                 <option value="全部" selected="selected">全部</option>
-                <option value="全部">咨询</option>
+                <option value="咨询">咨询</option>
                 <option value="投诉">投诉</option>
                 <option value="建议">建议</option>
             </select>

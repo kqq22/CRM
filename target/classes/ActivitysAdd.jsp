@@ -13,8 +13,8 @@
 </head>
 <body>
 <form method="post" action="/addActivity">
-    <input name="atvCustNo" value="${cstActivity.atvCustNo}" type="text" style="display: none;" />
-    <input name="atvCustName" value="${cstActivity.atvCustName}" type="text" style="display: none;" />
+    <input name="atvCustNo" value="${cstCustomer.custNo}" type="text" style="display: none;" />
+    <input name="atvCustName" value="${cstCustomer.custName}" type="text" style="display: none;"/>
 <table class="tableEdit">
     <thead>
     <tr>
@@ -45,7 +45,7 @@
     <tr>
         <td colspan="4">
             <input type="submit" value="确定" />&nbsp;&nbsp;
-            <a href="/findCstActivityAll?no=${cstActivity.atvCustNo}"><input type="button" value="关闭" /></a>
+            <a href="/findCstActivityAll?no=${cstCustomer.custNo}&name=${cstCustomer.custName}"><input type="button" value="关闭" /></a>
         </td>
     </tr>
     </tfoot>
