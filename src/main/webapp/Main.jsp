@@ -38,17 +38,29 @@
             $(".menuDiv").click(function () {
                 $(this).next("div").slideToggle(300);
             });
-            //显示当前时间
-            var date = new Date();
-            this.year = date.getFullYear();
-            this.month = date.getMonth() + 1;
-            this.date = date.getDate();
-            this.month = this.month < 10 ? ('0' + this.month) : this.month;
-            this.date = this.date < 10 ? ('0' + this.date) : this.date;
-            this.day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()];
-            var currentTime =  this.year + "." + this.month + "." + this.date + "," + this.day;
-            $("#currentTime").text(currentTime);
+            function getTime() {
+                //显示当前时间
+                var date = new Date();
+                this.year = date.getFullYear();
+                this.month = date.getMonth() + 1;
+                this.date = date.getDate();
+                this.hour = date.getHours();
+                this.minute = date.getMinutes();
+                this.second = date.getSeconds();
+
+                this.month = this.month < 10 ? ('0' + this.month) : this.month;
+                this.date = this.date < 10 ? ('0' + this.date) : this.date;
+                this.hour = this.hour < 10 ? ('0' + this.hour) : this.hour;
+                this.minute = this.minute < 10 ? ('0' + this.minute) : this.minute;
+                this.second = this.second < 10 ? ('0' + this.second) : this.second;
+                this.day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()];
+                var currentTime =  this.year + "年 " + this.month + "月 " + this.date + "日 " + this.day +"   "+ this.hour +" : "+ this.minute +" : "+ this.second;
+                $("#currentTime").text(currentTime);
+                setTimeout(getTime,1000);
+            }
+            window.onload = getTime;
         });
+
         $(function () {
             $("span").click(function () {
                 var a = $(this).children("a")
@@ -87,7 +99,7 @@
                                                     <td width="77%" height="25" valign="bottom">
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0"></table>
                                                     </td>
-                                                    <td width="220" valign="bottom" nowrap="nowrap"><div align="right" ><span class="STYLE1"><span class="STYLE2">■</span ><div id="currentTime"></div></span></div></td>
+                                                    <td width="220" valign="bottom" nowrap="nowrap"><div align="right" >■&nbsp;&nbsp;<span id="currentTime" class="STYLE1"><span  class="STYLE2"></span ></span></div></td>
                                                 </tr>
                                             </table>
                                         </td>
